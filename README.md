@@ -2,7 +2,7 @@
 
 A small, read-only bot that lists upcoming games and, for each side, shows the best price on offer across Polymarket, Kalshi and the other prediction markets Predictefy covers: which venue has it, the average, the no-vig fair price, and how far the best price is ahead of the next venue.
 
-It runs on your own computer, gets every number from the [Predictefy API](https://predictefy.com/en/api?utm_source=youtube&utm_medium=video&utm_campaign=best-odds-bot&utm_content=github), and opens a local dashboard in your browser. It never places orders and never asks for a venue account or a wallet key.
+It runs on your own computer, gets every number from the [Predictefy API](https://predictefy.com/en/api?utm_source=github&utm_medium=repo&utm_campaign=best-odds-bot&utm_content=github), and opens a local dashboard in your browser. It never places orders and never asks for a venue account or a wallet key.
 
 ![Best Odds dashboard](docs/dashboard.png)
 
