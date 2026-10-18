@@ -13,8 +13,8 @@ export const DEFAULTS = {
 export const CREDITS = {screen: 5, fixture: 5, leagues: 1, arbitrage: 15};
 export const PLANS = [
   {name: 'Free', credits: 25000, price: '$0'},
-  {name: 'Builder', credits: 500000, price: '$48.88 a month'},
-  {name: 'Pro', credits: 5000000, price: '$149 a month'},
+  {name: 'Builder', credits: 250000, price: '$48.88 a month'},
+  {name: 'Pro', credits: 2000000, price: '$149 a month'},
 ];
 
 export const VENUE_NAMES = {

@@ -61,7 +61,7 @@ The bot adds two things of its own:
 
 No. A gap on this board compares the top of each venue's book. It says nothing about depth beyond the size shown, and the venues' settlement rules can differ.
 
-Only Predictefy's arbitrage feed, `GET /api/router/fetchArbitrage`, checks live asks, depth, fees and settlement rules together. The **Run the check** button on the Alerts tab calls it with `executableOnly=true` (15 credits) and marks any game on your board that has a row passing every gate. That feed is on the Builder plan and higher. On the Free plan Predictefy answers `403 PLAN_REQUIRED` and the dashboard shows where to upgrade; everything else keeps working.
+Only Predictefy's arbitrage feed, `GET /api/router/fetchArbitrage`, checks live asks, depth, fees and settlement rules together. The **Run the check** button on the Alerts tab calls it with `executableOnly=true` (15 credits) and marks any game on your board that has a row passing every gate. That feed is on the Pro plan and higher. On Free and Builder, Predictefy answers `403 PLAN_REQUIRED` and the dashboard shows where to upgrade; everything else keeps working.
 
 ## What it costs to run
 

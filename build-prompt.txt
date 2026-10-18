@@ -13,7 +13,7 @@ DATA (base URL https://data.predictefy.com, all GET; docs at https://docs.predic
 - Each cell has venue, gross{probability, american, decimal} (the ask before fees, or null with grossReason), net (the price with the venue's known fees, or null), feeUnknown, sizeAtPrice, asOf, stale, source ("live" or "catalog").
 - best, avg, fair, edge and hold are Predictefy's own calculations. Show them exactly as returned. Do not recompute them and do not convert odds yourself. An empty cell is absent, never zero.
 - One game's spread and total, only when the user asks, 5 credits: /v1/sports/fixtures/{fixtureId}. Its data.markets[] holds one block per market type and period at its main line; show the full-game spread and total.
-- The arbitrage check, only when the user asks, 15 credits, Builder plan and higher: /api/router/fetchArbitrage?executableOnly=true&limit=500. Rows that belong to a sports game carry sports.fixtureId. A row counts only if label is "arbitrage" and executable is true.
+- The arbitrage check, only when the user asks, 15 credits, Pro plan and higher: /api/router/fetchArbitrage?executableOnly=true&limit=500. Rows that belong to a sports game carry sports.fixtureId. A row counts only if label is "arbitrage" and executable is true.
 - Read the x-credits-charged response header on every call and keep a running total.
 - If any call answers 402, or 403 with code PLAN_REQUIRED, keep running, show a box on the dashboard that says which route was refused, and link to https://predictefy.com/en/pricing?utm_source=youtube&utm_medium=video&utm_campaign=best-odds-bot&utm_content=upgrade
 
@@ -23,7 +23,7 @@ WHAT THE BOT WORKS OUT ITSELF
 - Lead: the comparable price of the cheapest live cell that is not the best venue, minus the best price, in cents.
 - Wide book: hold.average above 5%. One venue is quoting far from the rest, so the average, fair and edge mean little.
 - Alert (the bot's own rule, labelled "indicative"): the game is scheduled or live, the side has a fair price, the hold is not wide, at least 3 venues are live on that side, the lead is at least 1 cent, and at least 25 contracts sit at the best price. All four numbers are settings.
-- Cost: credits per refresh = leagues x 5. Per day = that x floor(1440 / refresh minutes) + 1. Per month = per day x 31. Name the smallest plan that covers it: Free 25,000 credits, Builder 500,000 ($48.88 a month), Pro 5,000,000 ($149 a month). Also work out the shortest refresh interval that still fits Free.
+- Cost: credits per refresh = leagues x 5. Per day = that x floor(1440 / refresh minutes) + 1. Per month = per day x 31. Name the smallest plan that covers it: Free 25,000 credits, Builder 250,000 ($48.88 a month), Pro 2,000,000 ($149 a month). Also work out the shortest refresh interval that still fits Free.
 
 BEHAVIOUR
 - Refresh every 30 minutes by default (1 to 1440). On start, print the leagues, the cost of one refresh and of a month, one line per API call with its credits, the next two games with both sides (best price, venue, avg, fair, edge), and an ALERT line for each of the first four alerts, for example: "ALERT  Las Vegas Raiders 37.3¢ on SX Bet · 1.5¢ under Novig · size 82 · indicative".

@@ -303,9 +303,9 @@ function boardHtml() {
 // ---- alerts ----
 function arbHtml() {
   const a = S.arbitrage;
-  if (S.gate && /fetchArbitrage/.test(S.gate.route)) return `<div class="box gate"><b>The arbitrage check is not on this plan.</b><p class="note">Predictefy answered <span class="mono">${esc(S.gate.status)} ${esc(S.gate.code)}</span> for <span class="mono">GET /api/router/fetchArbitrage</span>. The feed starts on the Builder plan (${esc(PLANS[1].price)}, 500,000 credits). Until then every gap on this board stays an indicative price difference. <a href="${esc(S.upgradeUrl)}" target="_blank" rel="noopener">See Predictefy's plans</a></p></div>`;
+  if (S.gate && /fetchArbitrage/.test(S.gate.route)) return `<div class="box gate"><b>The arbitrage check is not on this plan.</b><p class="note">Predictefy answered <span class="mono">${esc(S.gate.status)} ${esc(S.gate.code)}</span> for <span class="mono">GET /api/router/fetchArbitrage</span>. The feed starts on the Pro plan (${esc(PLANS[2].price)}, 2,000,000 credits). Until then every gap on this board stays an indicative price difference. <a href="${esc(S.upgradeUrl)}" target="_blank" rel="noopener">See Predictefy's plans</a></p></div>`;
   return `<div class="box"><div style="display:flex;align-items:center;gap:16px"><div class="grow"><b style="font-size:19px">Arbitrage check</b> <span class="mono">GET /api/router/fetchArbitrage?executableOnly=true</span>
-    <p class="note">${a ? `Checked ${esc(stamp(a.checkedAt))}: <b style="color:#fff">${a.passed}</b> row${a.passed === 1 ? '' : 's'} passed every gate across all of Predictefy's markets, <b style="color:#fff">${a.sports}</b> of them in sports, <b style="color:#fff">${a.onBoard.length}</b> on this board of ${a.games} games. ${a.onBoard.length ? 'Those games are marked below.' : 'Every alert below stays an indicative price difference.'}` : 'A gap on this board is an indicative price difference. Only this feed checks live asks, depth, fees and settlement rules together, and it needs the Builder plan or higher.'}</p></div>
+    <p class="note">${a ? `Checked ${esc(stamp(a.checkedAt))}: <b style="color:#fff">${a.passed}</b> row${a.passed === 1 ? '' : 's'} passed every gate across all of Predictefy's markets, <b style="color:#fff">${a.sports}</b> of them in sports, <b style="color:#fff">${a.onBoard.length}</b> on this board of ${a.games} games. ${a.onBoard.length ? 'Those games are marked below.' : 'Every alert below stays an indicative price difference.'}` : 'A gap on this board is an indicative price difference. Only this feed checks live asks, depth, fees and settlement rules together, and it needs the Pro plan or higher.'}</p></div>
     <button class="btn primary" id="arbRun" ${S.replay || arbBusy ? 'disabled' : ''}>${arbBusy ? 'Checking…' : 'Run the check'}<small>${CREDITS.arbitrage} credits</small></button></div></div>`;
 }
 function alertsHtml() {
@@ -338,7 +338,7 @@ function readHtml() {
   </div>
   <div class="two">
     <div class="card"><h4>What this bot adds</h4><p><b style="color:#fff">Lead</b> is the best price against the next venue's live price. For ${esc(pick.name)}: ${pick.next ? `${esc(pick.next.name)} is next at ${c1(pick.next.price)}, so the lead is ${pick.lead.toFixed(1)}¢.` : 'no second venue is live.'} The alert fires when the lead is ${S.config.minLeadCents}¢ or more, ${S.config.minVenues}+ venues are live, at least ${n0(S.config.minSize)} contracts sit at the best price, and the hold is under ${(S.config.wideHold * 100).toFixed(0)}%.</p></div>
-    <div class="card"><h4>What it is not</h4><p>A gap between venues is an <b style="color:#fff">indicative</b> price difference. The size is only what sits at the best price, and settlement rules can differ between venues. Only Predictefy's arbitrage feed checks live asks, depth, fees and rules together, and that feed starts on the Builder plan.</p></div>
+    <div class="card"><h4>What it is not</h4><p>A gap between venues is an <b style="color:#fff">indicative</b> price difference. The size is only what sits at the best price, and settlement rules can differ between venues. Only Predictefy's arbitrage feed checks live asks, depth, fees and rules together, and that feed starts on the Pro plan.</p></div>
   </div>`;
 }
 
@@ -366,10 +366,10 @@ function costHtml(d) {
     <div class="sum"><span>Credits a day · plus ${CREDITS.leagues} for the league list</span><b class="num">${cost.perDay.toLocaleString('en-US')}</b></div>
     <div class="sum total"><span>A 31-day month</span><b class="num">${cost.perMonth.toLocaleString('en-US')}</b></div>
     <div class="meter ${cost.fitsFree ? '' : 'over'}"><i style="width:${pct}%"></i></div>
-    <div class="verdict">${cost.fitsFree ? `Fits the Free plan (25,000 a month) with ${cost.spare.toLocaleString('en-US')} credits to spare.` : `Over the Free plan's 25,000. This pace needs ${esc(cost.plan || 'more than Pro')}${cost.plan === 'Builder' ? ' ($48.88 a month, 500,000 credits)' : ''}.`}</div>
+    <div class="verdict">${cost.fitsFree ? `Fits the Free plan (25,000 a month) with ${cost.spare.toLocaleString('en-US')} credits to spare.` : `Over the Free plan's 25,000. This pace needs ${esc(cost.plan || 'more than Pro')}${cost.plan === 'Builder' ? ' ($48.88 a month, 250,000 credits)' : ''}.`}</div>
     <p class="note">${cost.fitsFree ? `The fastest refresh that still fits Free with ${cost.leagues} league${cost.leagues === 1 ? '' : 's'} is every ${floor} minutes.` : `<a href="${esc(S.upgradeUrl)}" target="_blank" rel="noopener" style="color:#fff">See Predictefy's plans</a> or slow the refresh to every ${floor} minutes to stay on Free.`}</p>
     <div class="sum" style="margin-top:10px"><span>Opening a game's spread and total</span><b class="num">${CREDITS.fixture}</b></div>
-    <div class="sum"><span>One arbitrage check (Builder plan and up)</span><b class="num">${CREDITS.arbitrage}</b></div>
+    <div class="sum"><span>One arbitrage check (Pro plan and up)</span><b class="num">${CREDITS.arbitrage}</b></div>
     <div class="sum"><span>Used so far · ${S.counters.requests.toLocaleString('en-US')} requests</span><b class="num">${S.counters.credits.toLocaleString('en-US')}</b></div>`;
 }
 
@@ -408,7 +408,7 @@ function drawerHtml() {
     <h3>Spread and total <span class="grow"></span>${d ? '' : `<button class="btn" id="loadLines" ${lineBusy || (S.replay && !S.details[openId]) ? 'disabled' : ''}>${lineBusy ? 'Loading…' : 'Load spread and total'}<small>${S.replay ? (S.details[openId] ? 'saved' : 'not in the saved board') : `${CREDITS.fixture} credits`}</small></button>`}</h3>
     <p class="mono src">GET /v1/sports/fixtures/${esc(g.fixtureId)} · each market at its main line${d ? ` · read ${esc(stamp(d.readAt))}` : ''}</p>
     ${d ? `<div class="lines">${blockHtml(d.spread, spreadTitle)}${blockHtml(d.total, totalTitle)}</div>` : ''}
-    <h3>Is any of this arbitrage?</h3><p class="mono src">GET /api/router/fetchArbitrage?executableOnly=true · ${CREDITS.arbitrage} credits · Builder plan and up</p>
+    <h3>Is any of this arbitrage?</h3><p class="mono src">GET /api/router/fetchArbitrage?executableOnly=true · ${CREDITS.arbitrage} credits · Pro plan and up</p>
     ${S.gate && /fetchArbitrage/.test(S.gate.route) ? arbHtml() : `<div class="box"><p class="note" style="margin:0">${arb ? (hit.length ? `<b style="color:#fff">${hit.length} row${hit.length === 1 ? '' : 's'} for this game passed every gate</b> at ${esc(stamp(arb.checkedAt))}: ${hit.map(r => `${esc(venueName(r.buyYes))} against ${esc(venueName(r.buyNo))}, ${(r.roi * 100).toFixed(2)}% after fees on ${r.contracts} contracts`).join('; ')}. Check it again before acting.` : `Checked ${esc(stamp(arb.checkedAt))}: <b style="color:#fff">no row for this game passed the arbitrage check</b>. ${arb.passed} passed across all of Predictefy's markets and ${arb.sports} of those were sports. The gaps above are indicative price differences.`) : 'Not checked yet. Until the arbitrage check passes a row for this game, a gap between venues is an indicative price difference. Run the check from the Alerts tab.'}</p></div>`}`;
 }
 
