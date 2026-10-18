@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Best Odds</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b0b0c'/%3E%3Cpath d='M6 22h20' stroke='%2355534e' stroke-width='2'/%3E%3Ccircle cx='10' cy='22' r='4' fill='%23e0364f'/%3E%3Ccircle cx='19' cy='22' r='3' fill='%239a988f'/%3E%3Ccircle cx='25' cy='22' r='3' fill='%239a988f'/%3E%3C/svg%3E">
+<style>
+:root{
+  color-scheme:dark;
+  --plane:#0b0b0c;--surface:#151517;--surface-2:#1d1d20;--surface-3:#26262a;--ink:#fff;--ink-2:#c8c6bd;--muted:#8b8982;--quiet:#5a5852;
+  --hair:rgba(255,255,255,.10);--grid:#2a2a2d;
+  --brand:#e0364f;--brand-deep:#c41e3a;--brand-wash:#e0364f1f;
+  --best:#199e70;--best-wash:#199e7026;--venue:#9a988f;
+  --sans:Bahnschrift,"DIN Alternate","Barlow Semi Condensed","Segoe UI",system-ui,sans-serif;
+  --mono:"Cascadia Code","Cascadia Mono",Consolas,ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--plane);color:var(--ink);font:17px/1.4 var(--sans)}
+body{background:radial-gradient(1100px 380px at 12% -10%,#e0364f14,transparent 70%),repeating-linear-gradient(90deg,transparent 0 119px,#ffffff04 119px 120px),var(--plane)}
+button,input,select{font:inherit;color:inherit}
+.label{font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);font-stretch:85%;font-weight:500}
+.num{font-variant-numeric:tabular-nums}
+.mono{font-family:var(--mono);font-size:13.5px;letter-spacing:-.2px;color:var(--muted)}
+.dim{color:var(--muted)}.ink2{color:var(--ink-2)}
+.grow{flex:1}
+
+header{display:flex;align-items:center;gap:16px;padding:16px 36px 15px;border-bottom:1px solid var(--hair);position:relative}
+header::after{content:"";position:absolute;left:36px;bottom:-1px;width:176px;height:2px;background:var(--brand)}
+.mark{width:42px;height:42px;border-radius:10px;background:var(--surface-2);border:1px solid var(--hair);display:grid;place-items:center}
+h1{margin:0;font-size:28px;font-weight:600;letter-spacing:.3px;line-height:1.1}
+.tag{color:var(--ink-2);font-size:15.5px}
+.pill{display:inline-flex;align-items:center;gap:9px;padding:7px 15px;border:1px solid var(--hair);border-radius:999px;background:var(--surface);font-size:15px;color:var(--ink-2)}
+.pill b{color:var(--ink);font-weight:600}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--best)}.dot.busy{background:#c98500}.dot.bad{background:var(--brand)}.dot.replay{background:#3987e5}
+.btn{background:var(--surface-2);border:1px solid var(--hair);border-radius:10px;padding:8px 16px;cursor:pointer;font-size:15.5px;font-weight:500}
+.btn:hover{background:var(--surface-3)}
+.btn small{color:var(--muted);margin-left:8px;font-weight:400}
+.btn.primary{background:var(--brand-deep);border-color:#ffffff22}.btn.primary:hover{background:var(--brand)}.btn.primary small{color:#ffffffc0}
+.btn[disabled]{opacity:.5;cursor:default}
+
+.overview{display:grid;grid-template-columns:330px 1.25fr 1fr 250px 1.25fr;gap:14px;padding:16px 36px 2px}
+.tile{background:var(--surface);border:1px solid var(--hair);border-radius:14px;padding:14px 20px 13px;min-width:0}
+.hero{border-left:3px solid var(--brand)}
+.hero b{display:block;font-size:62px;line-height:1;font-weight:600;margin:6px 0 4px}
+.tile small{display:block;color:var(--ink-2);font-size:14.5px;margin-top:7px;line-height:1.3}
+.stat b{display:block;font-size:34px;font-weight:600;margin-top:10px;line-height:1}
+.stat b em{font-style:normal;font-size:17px;color:var(--ink-2);font-weight:500;margin-left:6px}
+.meter{height:8px;border-radius:4px;background:#199e7033;margin-top:11px;overflow:hidden}.meter i{display:block;height:100%;background:var(--best);border-radius:4px}
+.meter.over{background:#e0364f33}.meter.over i{background:var(--brand)}
+
+nav{display:flex;gap:4px;padding:12px 36px 0;border-bottom:1px solid var(--hair)}
+nav button{background:none;border:0;border-bottom:3px solid transparent;padding:9px 18px 11px;color:var(--muted);cursor:pointer;font-size:17.5px;letter-spacing:.2px}
+nav button:hover{color:var(--ink-2)}
+nav button.on{color:var(--ink);border-color:var(--brand);font-weight:600}
+nav button em{font-style:normal;margin-left:9px;padding:1px 9px;border-radius:999px;background:var(--surface-2);font-size:14px;color:var(--ink-2)}
+main{padding:6px 36px 60px}
+
+.filters{display:flex;align-items:center;gap:10px;padding:12px 0 10px;flex-wrap:wrap}
+.chip{background:var(--surface);border:1px solid var(--hair);border-radius:999px;padding:6px 15px;font-size:15px;color:var(--ink-2);cursor:pointer}
+.chip.on{background:var(--ink);color:#0b0b0c;border-color:var(--ink);font-weight:600}
+.sep{width:1px;height:22px;background:var(--hair);margin:0 6px}
+.legend{display:flex;gap:18px;align-items:center;font-size:14px;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.k{width:12px;height:12px;border-radius:50%;display:inline-block}
+.k.best{background:var(--best)}.k.live{background:var(--venue)}.k.stale{border:2px solid var(--venue)}.k.cat{border:2px solid var(--quiet);border-radius:2px;transform:rotate(45deg);width:10px;height:10px}
+.k.fair{width:2px;height:16px;border-radius:0;background:#fff}.k.avg{width:0;height:16px;border-radius:0;border-left:1px solid var(--muted)}
+
+table{width:100%;border-collapse:collapse}
+th{text-align:left;padding:8px 12px 7px;vertical-align:bottom}
+th .mono{display:block;margin-top:2px;font-size:12px;text-transform:none;letter-spacing:0}
+td{padding:6px 12px;vertical-align:middle}
+tbody.game{cursor:pointer;animation:rise .4s cubic-bezier(.2,.7,.2,1) both}
+tbody.game tr:first-child td{border-top:1px solid var(--hair);padding-top:11px}
+tbody.game tr:last-child td{padding-bottom:11px}
+tbody.game:hover td{background:#ffffff06}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.when{font-size:15px;color:var(--ink-2);white-space:nowrap}
+.when b{display:block;color:var(--ink);font-size:16.5px;font-weight:600}
+.league{display:inline-block;margin-top:5px;font-size:12px;letter-spacing:1.1px;text-transform:uppercase;color:var(--muted);border:1px solid var(--hair);border-radius:5px;padding:1px 7px}
+.team{font-size:19px;font-weight:600;white-space:nowrap;max-width:330px;overflow:hidden;text-overflow:ellipsis}
+.price{font-size:27px;font-weight:600;line-height:1;white-space:nowrap}
+.price small{font-size:15px;color:var(--ink-2);font-weight:500}
+.venue{display:inline-flex;align-items:center;gap:7px;font-size:15.5px;color:var(--ink);white-space:nowrap}
+.venue i{width:9px;height:9px;border-radius:50%;background:var(--best);display:inline-block}
+.sub{color:var(--muted);font-size:13.5px;white-space:nowrap}
+.fig{font-size:18px;white-space:nowrap}
+.pos{font-weight:600}
+.badge{display:inline-flex;align-items:center;gap:6px;border-radius:6px;padding:2px 9px;font-size:12.5px;letter-spacing:1px;font-weight:600;text-transform:uppercase;white-space:nowrap}
+.badge.alert{background:var(--brand-deep);color:#fff}
+.badge.ind{border:1px solid var(--hair);color:var(--ink-2)}
+.badge.wide{border:1px solid #c9850066;color:#e3b04a}
+.badge.thin{border:1px solid var(--hair);color:var(--muted)}
+.badge.bestb{background:var(--best-wash);color:#fff;border:1px solid #199e7088}
+.live-count{font-size:15px;color:var(--ink-2);white-space:nowrap}
+.live-count b{color:var(--ink);font-size:19px}
+.empty{padding:60px 0;text-align:center;color:var(--ink-2);font-size:19px}
+svg text{font-family:var(--sans)}
+
+#drawer{position:fixed;top:0;right:0;bottom:0;width:900px;background:#101012;border-left:1px solid var(--hair);box-shadow:-30px 0 80px #000a;transform:translateX(102%);transition:transform .32s cubic-bezier(.2,.7,.2,1);overflow-y:auto;z-index:20;padding:22px 30px 60px}
+#drawer.open{transform:none}
+#drawer h2{margin:0;font-size:29px;font-weight:600;line-height:1.15}
+#drawer h3{margin:26px 0 4px;font-size:21px;font-weight:600;display:flex;align-items:center;gap:12px}
+#drawer .src{margin:0 0 8px}
+.close{position:absolute;top:18px;right:22px}
+.oc{background:var(--surface);border:1px solid var(--hair);border-radius:14px;padding:14px 18px 10px;margin-top:12px}
+.oc-head{display:flex;align-items:flex-end;gap:18px;margin-bottom:6px}
+.oc-head .team{font-size:22px;max-width:none}
+.oc table td{padding:5px 8px;border-top:1px solid #ffffff0d;font-size:16px}
+.oc table th{padding:4px 8px}
+.oc tr.is-best td{background:var(--best-wash)}
+.state{font-size:12.5px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.state.live{color:var(--ink-2)}
+.nums{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:12px}
+.nums div{background:var(--surface);border:1px solid var(--hair);border-radius:12px;padding:10px 14px}
+.nums b{display:block;font-size:24px;font-weight:600;margin-top:4px}
+.note{color:var(--ink-2);font-size:15.5px;line-height:1.45;margin:8px 0 0}
+.box{background:var(--surface);border:1px solid var(--hair);border-radius:14px;padding:14px 18px;margin-top:10px}
+.box.gate{border-color:#e0364f77;background:#e0364f12}
+.box a{color:#fff}
+.lines{display:grid;grid-template-columns:1fr;gap:0}
+.line-o{display:flex;align-items:baseline;gap:12px;padding:6px 0;border-top:1px solid #ffffff0d}
+.line-o:first-of-type{border-top:0}
+
+.cards{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:14px}
+.card{background:var(--surface);border:1px solid var(--hair);border-radius:14px;padding:16px 18px}
+.card h4{margin:0 0 6px;font-size:23px;font-weight:600}
+.card p{margin:0;color:var(--ink-2);font-size:16px;line-height:1.42}
+.card .work{margin-top:12px;padding-top:10px;border-top:1px solid var(--hair);font-size:17px;color:var(--ink)}
+.card .work b{font-size:26px;display:block;margin-top:2px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.lede{font-size:19px;color:var(--ink-2);margin:14px 0 0;max-width:1300px}
+.lede b{color:var(--ink)}
+
+.settings{display:grid;grid-template-columns:1fr 1fr 1.15fr;gap:16px;margin-top:14px;align-items:start}
+.field{display:flex;align-items:center;gap:14px;padding:11px 0;border-top:1px solid var(--hair)}
+.field:first-of-type{border-top:0}
+.field label{flex:1;font-size:17px}
+.field label small{display:block;color:var(--muted);font-size:14px}
+.field input{width:110px;background:var(--surface-2);border:1px solid var(--hair);border-radius:9px;padding:8px 12px;font-size:19px;text-align:right}
+.field input:focus{outline:2px solid var(--brand);outline-offset:1px}
+.leagues{max-height:560px;overflow-y:auto;margin-top:6px}
+.lg{display:flex;align-items:center;gap:12px;padding:8px 4px;border-top:1px solid #ffffff0d;cursor:pointer;font-size:17px}
+.lg input{width:19px;height:19px;accent-color:var(--brand)}
+.lg small{color:var(--muted);font-size:14px;margin-left:auto;white-space:nowrap}
+.sum{display:flex;justify-content:space-between;align-items:baseline;padding:8px 0;border-top:1px solid #ffffff0d;font-size:17px;color:var(--ink-2)}
+.sum b{color:var(--ink);font-size:21px;font-weight:600}
+.sum.total b{font-size:38px}
+.verdict{font-size:18px;margin-top:12px;font-weight:600}
+#tip{position:fixed;z-index:50;pointer-events:none;background:#000;border:1px solid var(--hair);border-radius:9px;padding:8px 12px;font-size:14.5px;display:none;max-width:320px;box-shadow:0 8px 30px #000c}
+#tip b{font-size:18px;display:block}
+</style>
+</head>
+<body>
+<header>
+  <div class="mark"><svg width="26" height="26" viewBox="0 0 32 32"><path d="M3 22h26" stroke="#55534e" stroke-width="2"/><circle cx="9" cy="22" r="5" fill="#e0364f"/><circle cx="19" cy="22" r="3.4" fill="#9a988f"/><circle cx="26" cy="22" r="3.4" fill="#9a988f"/><path d="M9 5v9" stroke="#fff" stroke-width="2"/></svg></div>
+  <div><h1>Best Odds</h1><div class="tag">A price comparison across prediction markets · every number comes from the Predictefy API</div></div>
+  <div class="grow"></div>
+  <span class="pill"><span class="dot" id="statusDot"></span><span id="status">Connecting…</span></span>
+  <button class="btn" id="refreshNow">Refresh now<small id="refreshCost"></small></button>
+</header>
+
+<section class="overview" id="overview"></section>
+<nav id="tabs">
+  <button data-tab="board">Board<em id="nBoard">0</em></button>
+  <button data-tab="alerts">Alerts<em id="nAlerts">0</em></button>
+  <button data-tab="read">How to read it</button>
+  <button data-tab="settings">Settings &amp; cost</button>
+</nav>
+<main id="main"></main>
+<aside id="drawer"></aside>
+<div id="tip"></div>
+
+<script type="module">
+import {costPlan, shortestInterval, kickoffLabel, signed, venueName, CREDITS, PLANS} from '/engine.mjs';
+
+const $ = s => document.querySelector(s);
+const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+const c1 = v => v === null || v === undefined ? '–' : `${v.toFixed(1)}¢`;
+const n0 = v => v === null || v === undefined ? '–' : Math.round(v).toLocaleString('en-US');
+const size = v => v === null || v === undefined ? '–' : v >= 1e6 ? `${(v / 1e6).toFixed(1)}M` : v >= 10000 ? `${Math.round(v / 1000)}K` : Math.round(v).toLocaleString('en-US');
+const clock = iso => iso ? new Date(iso).toLocaleTimeString('en-US', {hour: 'numeric', minute: '2-digit'}) : '–';
+const stamp = iso => iso ? new Date(iso).toLocaleString('en-US', {month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZoneName: 'short'}) : '–';
+const ago = (iso, now) => { if (!iso) return '–'; const s = Math.max(0, (now - Date.parse(iso)) / 1000); return s < 90 ? `${Math.round(s)}s` : s < 5400 ? `${Math.round(s / 60)} min` : `${(s / 3600).toFixed(1)} h`; };
+const SCREEN = 'GET /v1/sports/screen';
+
+let S = null, tab = 'board', openId = null, detail = {}, arbBusy = false, lineBusy = false, draft = null;
+const filter = {league: 'all', when: 'week', multi: true, sort: 'kickoff'};
+const refTime = () => S.replay && S.lastRefresh ? Date.parse(S.lastRefresh) : Date.now();
+
+// ---- the price strip: every venue's price for one outcome on one short scale ----
+// The scale is always 6 cents wide, so a gap looks the same size on every row.
+function scale(outcome, width, pad) {
+  const prices = outcome.venues.filter(v => v.compare !== null).map(v => v.compare);
+  let lo = Math.min(...prices);
+  if (outcome.best && outcome.best.price > lo + 3.5) lo = outcome.best.price - 1;
+  const d0 = lo - 0.75, span = 6;
+  return {d0, d1: d0 + span, x: p => pad + Math.max(0, Math.min(1, (p - d0) / span)) * (width - pad * 2), off: p => p > d0 + span ? 1 : p < d0 ? -1 : 0};
+}
+function dotMark(v, outcome, x, y, r) {
+  const isBest = outcome.best && v.venue === outcome.best.venue && v.state === 'live';
+  const tip = `data-tip="${esc(v.name)}|${esc(c1(v.compare))}|${esc(v.state === 'live' ? (isBest ? 'best live price' : 'live price') : v.state === 'stale' ? 'stale quote, cannot win best' : 'listed price, not a live ask')}${v.feeUnknown ? ' · fee unknown' : ' · with fees'}${v.size !== null ? ` · size ${size(v.size)}` : ''}"`;
+  if (v.state === 'catalog') return `<rect ${tip} x="${x - r + 1.5}" y="${y - r + 1.5}" width="${r * 2 - 3}" height="${r * 2 - 3}" transform="rotate(45 ${x} ${y})" fill="#151517" stroke="#5a5852" stroke-width="2"/>`;
+  if (v.state === 'stale') return `<circle ${tip} cx="${x}" cy="${y}" r="${r - 1}" fill="#151517" stroke="#9a988f" stroke-width="2"/>`;
+  return `<circle ${tip} cx="${x}" cy="${y}" r="${isBest ? r + 2 : r}" fill="${isBest ? '#199e70' : '#9a988f'}" stroke="#151517" stroke-width="2"/>`;
+}
+function strip(outcome, width = 520, height = 46) {
+  const shown = outcome.venues.filter(v => v.compare !== null);
+  if (!shown.length) return '<span class="dim">no prices</span>';
+  const pad = 14, sc = scale(outcome, width, pad), mid = height / 2 - 4;
+  let out = `<svg width="${width}" height="${height}" role="img" aria-label="${esc(outcome.name)} prices by venue">`;
+  out += `<line x1="${pad}" x2="${width - pad}" y1="${mid}" y2="${mid}" stroke="#2a2a2d"/>`;
+  for (let t = Math.ceil(sc.d0); t <= sc.d1; t++) out += `<line x1="${sc.x(t)}" x2="${sc.x(t)}" y1="${mid - 5}" y2="${mid + 5}" stroke="#3a3a3e"/><text x="${sc.x(t)}" y="${height - 2}" font-size="12" fill="#6f6d67" text-anchor="middle">${t}</text>`;
+  if (outcome.avg !== null && !sc.off(outcome.avg)) out += `<line x1="${sc.x(outcome.avg)}" x2="${sc.x(outcome.avg)}" y1="${mid - 14}" y2="${mid + 14}" stroke="#8b8982" stroke-width="1"/>`;
+  if (outcome.fair !== null && !sc.off(outcome.fair)) out += `<line x1="${sc.x(outcome.fair)}" x2="${sc.x(outcome.fair)}" y1="${mid - 16}" y2="${mid + 16}" stroke="#fff" stroke-width="2"/>`;
+  // Dots at the same price sit side by side vertically instead of hiding each other.
+  const slots = new Map();
+  const order = shown.slice().sort((a, b) => (a.state === 'live') - (b.state === 'live') || (outcome.best && a.venue === outcome.best.venue ? 1 : 0) - (outcome.best && b.venue === outcome.best.venue ? 1 : 0));
+  for (const v of order) {
+    const off = sc.off(v.compare), x = off > 0 ? width - pad : off < 0 ? pad : sc.x(v.compare), slot = Math.round(x / 13), n = slots.get(slot) || 0;
+    slots.set(slot, n + 1);
+    const y = mid + [0, -11, 11, -20, 20][Math.min(n, 4)];
+    out += dotMark(v, outcome, x, y, 6);
+    if (off) out += `<text x="${x + (off > 0 ? 9 : -9)}" y="${y + 4}" font-size="13" fill="#8b8982" text-anchor="${off > 0 ? 'start' : 'end'}">${off > 0 ? '›' : '‹'}</text>`;
+  }
+  return out + '</svg>';
+}
+
+// ---- overview ----
+function overview() {
+  const withMarket = S.games.filter(g => g.outcomes.length), multi = withMarket.filter(g => g.liveVenues.length >= S.config.minVenues);
+  const venues = [...new Set(withMarket.flatMap(g => g.liveVenues))].map(venueName).sort();
+  const active = S.alerts.filter(a => a.active).length, cost = S.cost, pct = Math.min(100, cost.perMonth / 25000 * 100);
+  $('#overview').innerHTML = `
+    <div class="tile hero"><span class="label">Games on the board</span><b>${S.games.length}</b><small>${multi.length} have ${S.config.minVenues} or more venues with a live price</small></div>
+    <div class="tile stat"><span class="label">Venues with a live price</span><b>${venues.length}</b><small>${esc(venues.join(' · ') || 'none yet')}</small></div>
+    <div class="tile stat"><span class="label">Alerts right now</span><b>${active}</b><small>best price ${S.config.minLeadCents}¢ or more ahead of the next venue · indicative</small></div>
+    <div class="tile stat"><span class="label">One refresh</span><b>${cost.perRefresh}<em>credits</em></b><small>${cost.leagues} league${cost.leagues === 1 ? '' : 's'} × ${CREDITS.screen} · every ${S.config.refreshMinutes} min</small></div>
+    <div class="tile stat"><span class="label">A 31-day month at this pace</span><b>${cost.perMonth.toLocaleString('en-US')}<em>credits</em></b><div class="meter ${cost.fitsFree ? '' : 'over'}"><i style="width:${pct}%"></i></div><small>${cost.fitsFree ? `Fits the Free plan's 25,000 with ${cost.spare.toLocaleString('en-US')} to spare` : `More than the Free plan's 25,000 · needs ${esc(cost.plan || 'a larger plan')}`}</small></div>`;
+  $('#nBoard').textContent = S.games.length; $('#nAlerts').textContent = active;
+  const dot = $('#statusDot'); dot.className = `dot ${S.replay ? 'replay' : S.error ? 'bad' : S.busy ? 'busy' : ''}`;
+  $('#status').innerHTML = S.replay ? `<b>Replay</b> · board saved ${esc(stamp(S.lastRefresh))}` : S.error ? `<b>Problem</b> · ${esc(S.error)}` : S.busy ? '<b>Reading prices…</b>' : `<b>Live</b> · refreshed ${esc(clock(S.lastRefresh))} · next ${esc(clock(S.nextRefreshAt))}`;
+  $('#refreshCost').textContent = S.replay ? 'off in replay' : `${cost.perRefresh} credits`;
+  $('#refreshNow').disabled = S.replay || S.busy;
+}
+
+// ---- board ----
+function visibleGames() {
+  const now = refTime();
+  let games = S.games.filter(g => g.outcomes.length);
+  if (filter.league !== 'all') games = games.filter(g => g.leagueId === filter.league);
+  if (filter.when === 'day') games = games.filter(g => g.kickoffAt && Date.parse(g.kickoffAt) - now < 24 * 3600e3);
+  if (filter.multi) games = games.filter(g => g.liveVenues.length >= S.config.minVenues);
+  const lead = g => Math.max(-1, ...g.outcomes.map(o => o.lead ?? -1));
+  const edge = g => Math.max(-9, ...g.outcomes.map(o => o.edge ?? -9));
+  if (filter.sort === 'lead') games = games.slice().sort((a, b) => lead(b) - lead(a));
+  if (filter.sort === 'edge') games = games.slice().sort((a, b) => edge(b) - edge(a));
+  return games;
+}
+function boardHtml() {
+  const games = visibleGames(), leagues = S.leagues.filter(l => !l.missing);
+  let html = `<div class="filters">
+    <span class="chip ${filter.league === 'all' ? 'on' : ''}" data-league="all">All leagues</span>${leagues.map(l => `<span class="chip ${filter.league === l.id ? 'on' : ''}" data-league="${esc(l.id)}">${esc(l.name)}</span>`).join('')}
+    <span class="sep"></span><span class="chip ${filter.when === 'day' ? 'on' : ''}" data-when="day">Next 24 hours</span><span class="chip ${filter.when === 'week' ? 'on' : ''}" data-when="week">This week</span>
+    <span class="sep"></span><span class="chip ${filter.multi ? 'on' : ''}" data-multi>${S.config.minVenues}+ venues live</span>
+    <span class="sep"></span><span class="chip ${filter.sort === 'kickoff' ? 'on' : ''}" data-sort="kickoff">By kickoff</span><span class="chip ${filter.sort === 'lead' ? 'on' : ''}" data-sort="lead">Biggest lead</span><span class="chip ${filter.sort === 'edge' ? 'on' : ''}" data-sort="edge">Biggest edge</span>
+    <span class="grow"></span>
+    <span class="legend"><span><i class="k best"></i>best</span><span><i class="k live"></i>live venue</span><span><i class="k stale"></i>stale</span><span><i class="k cat"></i>listed, not live</span><span><i class="k fair"></i>fair</span><span><i class="k avg"></i>avg</span></span>
+  </div>`;
+  if (!games.length) return html + `<div class="empty">No games match these filters.${S.games.length ? '' : ' Pick leagues that are in season under Settings &amp; cost.'}</div>`;
+  html += `<table><thead><tr>
+    <th style="width:190px"><span class="label">Kickoff</span><span class="mono">${SCREEN}</span></th>
+    <th><span class="label">Outcome</span><span class="mono">selections[]</span></th>
+    <th><span class="label">Best price</span><span class="mono">best · with fees</span></th>
+    <th><span class="label">Where</span><span class="mono">best.venue · sizeAtPrice</span></th>
+    <th style="width:540px"><span class="label">Every venue, in cents</span><span class="mono">cells[] · 6¢ window</span></th>
+    <th><span class="label">Avg</span><span class="mono">avg</span></th>
+    <th><span class="label">Fair</span><span class="mono">fair</span></th>
+    <th><span class="label">Edge</span><span class="mono">edge</span></th>
+    <th><span class="label">Lead</span><span class="mono">best vs next</span></th>
+    <th><span class="label">Venues</span><span class="mono">live / listed</span></th></tr></thead>`;
+  games.slice(0, 60).forEach((g, i) => {
+    const alerts = new Set(g.alerts.map(a => a.outcome));
+    html += `<tbody class="game" data-id="${esc(g.fixtureId)}" style="animation-delay:${Math.min(i, 12) * 30}ms">`;
+    g.outcomes.forEach((o, j) => {
+      const thin = o.best && o.best.size !== null && o.best.size < S.config.minSize;
+      html += `<tr class="outcome">${j === 0 ? `<td rowspan="${g.outcomes.length}"><div class="when"><b>${esc(kickoffLabel(g).replace(/, (\d+:)/, ' · $1'))}</b>${g.status === 'live' ? 'in play' : ''}<span class="league">${esc(g.league)}</span></div></td>` : ''}
+        <td><div class="team">${esc(o.name)}</div>${alerts.has(o.name) ? '<span class="badge alert">Alert</span>' : ''}</td>
+        <td><div class="price num">${o.best ? `${o.best.price.toFixed(1)}<small>¢</small>` : '–'}</div>${o.best && !o.best.withFees ? '<div class="sub">ask, fee unknown</div>' : ''}</td>
+        <td>${o.best ? `<span class="venue"><i></i>${esc(o.best.name)}</span><div class="sub num">size ${size(o.best.size)}${thin ? ' · thin' : ''}</div>` : '<span class="dim">no live ask</span>'}</td>
+        <td>${strip(o)}</td>
+        <td class="fig num ink2">${c1(o.avg)}</td>
+        <td class="fig num">${c1(o.fair)}</td>
+        <td class="fig num ${g.wideBook ? 'dim' : o.edge > 0 ? 'pos' : 'ink2'}">${signed(o.edge)}</td>
+        <td class="fig num ${o.lead >= S.config.minLeadCents ? 'pos' : 'ink2'}">${o.lead === null ? '–' : `${o.lead.toFixed(1)}¢`}</td>
+        ${j === 0 ? `<td rowspan="${g.outcomes.length}"><div class="live-count"><b>${g.liveVenues.length}</b> of ${g.listedVenues.length}</div>${g.wideBook ? '<span class="badge wide">Wide book</span>' : g.hold === null ? '<span class="badge thin">One side missing</span>' : ''}</td>` : ''}</tr>`;
+    });
+    html += '</tbody>';
+  });
+  return html + `</table>${games.length > 60 ? `<p class="note">Showing the first 60 of ${games.length} games. Narrow the filters to see the rest.</p>` : ''}`;
+}
+
+// ---- alerts ----
+function arbHtml() {
+  const a = S.arbitrage;
+  if (S.gate && /fetchArbitrage/.test(S.gate.route)) return `<div class="box gate"><b>The arbitrage check is not on this plan.</b><p class="note">Predictefy answered <span class="mono">${esc(S.gate.status)} ${esc(S.gate.code)}</span> for <span class="mono">GET /api/router/fetchArbitrage</span>. The feed starts on the Builder plan (${esc(PLANS[1].price)}, 500,000 credits). Until then every gap on this board stays an indicative price difference. <a href="${esc(S.upgradeUrl)}" target="_blank" rel="noopener">See Predictefy's plans</a></p></div>`;
+  return `<div class="box"><div style="display:flex;align-items:center;gap:16px"><div class="grow"><b style="font-size:19px">Arbitrage check</b> <span class="mono">GET /api/router/fetchArbitrage?executableOnly=true</span>
+    <p class="note">${a ? `Checked ${esc(stamp(a.checkedAt))}: <b style="color:#fff">${a.passed}</b> row${a.passed === 1 ? '' : 's'} passed every gate across all of Predictefy's markets, <b style="color:#fff">${a.sports}</b> of them in sports, <b style="color:#fff">${a.onBoard.length}</b> on this board of ${a.games} games. ${a.onBoard.length ? 'Those games are marked below.' : 'Every alert below stays an indicative price difference.'}` : 'A gap on this board is an indicative price difference. Only this feed checks live asks, depth, fees and settlement rules together, and it needs the Builder plan or higher.'}</p></div>
+    <button class="btn primary" id="arbRun" ${S.replay || arbBusy ? 'disabled' : ''}>${arbBusy ? 'Checking…' : 'Run the check'}<small>${CREDITS.arbitrage} credits</small></button></div></div>`;
+}
+function alertsHtml() {
+  const now = refTime(), confirmed = new Set((S.arbitrage?.onBoard || []).map(r => r.fixtureId));
+  let html = `<p class="lede">An alert means one venue's best price is <b>${S.config.minLeadCents}¢ or more</b> under the next venue, with <b>${S.config.minVenues}+ venues</b> quoting live, at least <b>${n0(S.config.minSize)} contracts</b> on offer and no wide book. It is this bot's own rule on top of Predictefy's numbers.</p>${arbHtml()}`;
+  if (!S.alerts.length) return html + '<div class="empty">No alerts yet. Nothing on the board is clearly ahead of the rest.</div>';
+  html += `<table style="margin-top:12px"><thead><tr><th><span class="label">First seen</span></th><th><span class="label">Outcome</span></th><th><span class="label">Best price</span><span class="mono">best</span></th><th><span class="label">Next venue</span><span class="mono">cells[]</span></th><th><span class="label">Lead</span></th><th><span class="label">Size</span><span class="mono">sizeAtPrice</span></th><th><span class="label">Fair</span><span class="mono">fair</span></th><th><span class="label">Edge</span><span class="mono">edge</span></th><th><span class="label">Status</span></th></tr></thead>`;
+  for (const a of S.alerts.slice(0, 40)) html += `<tbody class="game" data-id="${esc(a.fixtureId)}"><tr>
+    <td><div class="when"><b>${esc(clock(a.firstSeen))}</b>${esc(ago(a.firstSeen, now))} ago</div></td>
+    <td><div class="team">${esc(a.outcome)}</div><div class="sub">${esc(a.game)} · ${esc(a.league)}</div></td>
+    <td><div class="price num">${a.price.toFixed(1)}<small>¢</small></div><span class="venue"><i></i>${esc(a.venueName)}</span></td>
+    <td><div class="fig num ink2">${a.nextPrice.toFixed(1)}¢</div><div class="sub">${esc(a.nextVenueName)}</div></td>
+    <td class="fig num pos">${a.lead.toFixed(1)}¢</td><td class="fig num ink2">${size(a.size)}</td><td class="fig num">${c1(a.fair)}</td><td class="fig num ${a.edge > 0 ? 'pos' : 'ink2'}">${signed(a.edge)}</td>
+    <td>${confirmed.has(a.fixtureId) ? '<span class="badge bestb">Passed the arbitrage check</span>' : '<span class="badge ind">Indicative</span>'} ${a.active ? '' : '<span class="badge thin">Gone</span>'}</td></tr></tbody>`;
+  return html + '</table>';
+}
+
+// ---- how to read it, worked with a real game from the board ----
+function readHtml() {
+  const g = S.games.filter(x => x.outcomes.length === 2 && !x.wideBook && x.outcomes.every(o => o.best && o.fair !== null)).sort((a, b) => b.liveVenues.length - a.liveVenues.length)[0];
+  if (!g) return '<div class="empty">The examples appear once the board has a game with prices on several venues.</div>';
+  const [a, b] = g.outcomes, pick = a.edge >= b.edge ? a : b, sum = a.avg + b.avg;
+  return `<p class="lede">Worked with a game on the board right now: <b>${esc(g.title)}</b>, ${esc(kickoffLabel(g))}. Best, avg, fair, edge and hold are <b>Predictefy's own calculations</b>, returned by <span class="mono">${SCREEN}</span>. They compare prices. They do not promise a fill or a profit.</p>
+  <div class="cards">
+    <div class="card"><h4>Best</h4><p>The cheapest live ask for that outcome, fees included when the venue's fee is known. Stale quotes and listed prices cannot win.</p><div class="work">${esc(pick.name)}<b class="num">${pick.best.price.toFixed(2)}¢ on ${esc(pick.best.name)}</b></div></div>
+    <div class="card"><h4>Avg</h4><p>The plain average of the live asks across venues, before fees. The bookmakers' margin is still inside it.</p><div class="work">${esc(pick.name)} across ${pick.liveVenues} venues<b class="num">${pick.avg.toFixed(2)}¢</b></div></div>
+    <div class="card"><h4>Fair</h4><p>The no-vig price. Take the average for each side and scale them so they add up to 100.</p><div class="work num">${a.avg.toFixed(2)} + ${b.avg.toFixed(2)} = ${sum.toFixed(2)}<br>${pick.avg.toFixed(2)} ÷ ${sum.toFixed(2)} × 100<b>${pick.fair.toFixed(2)}¢</b></div></div>
+    <div class="card"><h4>Edge</h4><p>Fair divided by best, minus one. Above zero, the best price is cheaper than fair. It is usually a little below zero.</p><div class="work num">${pick.fair.toFixed(2)} ÷ ${pick.best.price.toFixed(2)} − 1<b>${signed(pick.edge)}</b></div></div>
+    <div class="card"><h4>Hold</h4><p>How far the two averages add up past 100. That is the margin built into the prices. A big hold means a wide book.</p><div class="work num">${sum.toFixed(2)} − 100<b>${g.hold === null ? '–' : `${(g.hold * 100).toFixed(1)}%`}</b></div></div>
+  </div>
+  <div class="two">
+    <div class="card"><h4>What this bot adds</h4><p><b style="color:#fff">Lead</b> is the best price against the next venue's live price. For ${esc(pick.name)}: ${pick.next ? `${esc(pick.next.name)} is next at ${c1(pick.next.price)}, so the lead is ${pick.lead.toFixed(1)}¢.` : 'no second venue is live.'} The alert fires when the lead is ${S.config.minLeadCents}¢ or more, ${S.config.minVenues}+ venues are live, at least ${n0(S.config.minSize)} contracts sit at the best price, and the hold is under ${(S.config.wideHold * 100).toFixed(0)}%.</p></div>
+    <div class="card"><h4>What it is not</h4><p>A gap between venues is an <b style="color:#fff">indicative</b> price difference. The size is only what sits at the best price, and settlement rules can differ between venues. Only Predictefy's arbitrage feed checks live asks, depth, fees and rules together, and that feed starts on the Builder plan.</p></div>
+  </div>`;
+}
+
+// ---- settings and cost ----
+function settingsHtml() {
+  const d = draft || (draft = {refreshMinutes: S.config.refreshMinutes, minVenues: S.config.minVenues, minLeadCents: S.config.minLeadCents, minSize: S.config.minSize, leagues: S.leagues.filter(l => !l.missing).map(l => l.id)});
+  const list = S.leagueList.filter(l => l.venues.length >= 3 || d.leagues.includes(l.id)).slice(0, 40);
+  return `<div class="settings">
+    <div class="tile"><span class="label">Leagues to watch</span><span class="mono" style="float:right">GET /v1/sports/competitions</span>
+      <div class="leagues">${list.map(l => `<label class="lg"><input type="checkbox" data-lg="${esc(l.id)}" ${d.leagues.includes(l.id) ? 'checked' : ''}>${esc(l.name)}<small>${esc(l.sport.replace(/_/g, ' '))} · ${l.venues.length} venues</small></label>`).join('') || '<p class="note">The league list loads with the first refresh.</p>'}</div></div>
+    <div class="tile"><span class="label">Refresh and alerts</span>
+      <div class="field"><label>Refresh every<small>minutes · one screen call per league</small></label><input id="refreshMinutes" type="number" min="1" max="1440" value="${d.refreshMinutes}"></div>
+      <div class="field"><label>Alert lead<small>cents under the next venue</small></label><input id="minLeadCents" type="number" min="0.1" step="0.1" value="${d.minLeadCents}"></div>
+      <div class="field"><label>Venues needed<small>with a live price on the outcome</small></label><input id="minVenues" type="number" min="2" max="12" value="${d.minVenues}"></div>
+      <div class="field"><label>Smallest size<small>contracts at the best price</small></label><input id="minSize" type="number" min="0" value="${d.minSize}"></div>
+      <div style="display:flex;gap:10px;margin-top:14px"><button class="btn primary" id="save">Save settings</button><button class="btn" id="reset">Undo changes</button></div>
+      <p class="note" id="saveNote">Changing the alert rule costs nothing. It is applied to prices already on the board.</p></div>
+    <div class="tile" id="costBox">${costHtml(d)}</div></div>`;
+}
+function costHtml(d) {
+  const cost = costPlan({leagues: d.leagues, refreshMinutes: Math.max(1, Math.round(Number(d.refreshMinutes) || 1))}), pct = Math.min(100, cost.perMonth / 25000 * 100), floor = shortestInterval(Math.max(1, d.leagues.length));
+  return `<span class="label">What this costs to run</span><span class="mono" style="float:right">credits · docs.predictefy.com/guides/credits</span>
+    <div class="sum" style="margin-top:8px"><span>One refresh · ${cost.leagues} league${cost.leagues === 1 ? '' : 's'} × ${CREDITS.screen} credits</span><b class="num">${cost.perRefresh}</b></div>
+    <div class="sum"><span>Refreshes a day</span><b class="num">${cost.refreshesPerDay}</b></div>
+    <div class="sum"><span>Credits a day · plus ${CREDITS.leagues} for the league list</span><b class="num">${cost.perDay.toLocaleString('en-US')}</b></div>
+    <div class="sum total"><span>A 31-day month</span><b class="num">${cost.perMonth.toLocaleString('en-US')}</b></div>
+    <div class="meter ${cost.fitsFree ? '' : 'over'}"><i style="width:${pct}%"></i></div>
+    <div class="verdict">${cost.fitsFree ? `Fits the Free plan (25,000 a month) with ${cost.spare.toLocaleString('en-US')} credits to spare.` : `Over the Free plan's 25,000. This pace needs ${esc(cost.plan || 'more than Pro')}${cost.plan === 'Builder' ? ' ($48.88 a month, 500,000 credits)' : ''}.`}</div>
+    <p class="note">${cost.fitsFree ? `The fastest refresh that still fits Free with ${cost.leagues} league${cost.leagues === 1 ? '' : 's'} is every ${floor} minutes.` : `<a href="${esc(S.upgradeUrl)}" target="_blank" rel="noopener" style="color:#fff">See Predictefy's plans</a> or slow the refresh to every ${floor} minutes to stay on Free.`}</p>
+    <div class="sum" style="margin-top:10px"><span>Opening a game's spread and total</span><b class="num">${CREDITS.fixture}</b></div>
+    <div class="sum"><span>One arbitrage check (Builder plan and up)</span><b class="num">${CREDITS.arbitrage}</b></div>
+    <div class="sum"><span>Used so far · ${S.counters.requests.toLocaleString('en-US')} requests</span><b class="num">${S.counters.credits.toLocaleString('en-US')}</b></div>`;
+}
+
+// ---- one game ----
+function venueTable(o, now) {
+  const sc = scale(o, 250, 10);
+  const cell = v => {
+    if (v.compare === null) return '';
+    const off = sc.off(v.compare), x = off > 0 ? 240 : off < 0 ? 10 : sc.x(v.compare);
+    let s = `<svg width="250" height="26"><line x1="10" x2="240" y1="13" y2="13" stroke="#2a2a2d"/>`;
+    if (o.avg !== null && !sc.off(o.avg)) s += `<line x1="${sc.x(o.avg)}" x2="${sc.x(o.avg)}" y1="0" y2="26" stroke="#8b8982"/>`;
+    if (o.fair !== null && !sc.off(o.fair)) s += `<line x1="${sc.x(o.fair)}" x2="${sc.x(o.fair)}" y1="0" y2="26" stroke="#fff" stroke-width="2"/>`;
+    return s + dotMark(v, o, x, 13, 6) + (off ? `<text x="${x - 12}" y="18" font-size="13" fill="#8b8982" text-anchor="end">off scale ›</text>` : '') + '</svg>';
+  };
+  const stateText = v => o.best && v.venue === o.best.venue && v.state === 'live' ? '<span class="badge bestb">Best</span>' : v.state === 'live' ? '<span class="state live">live</span>' : v.state === 'stale' ? '<span class="state">stale</span>' : v.state === 'catalog' ? '<span class="state">listed, not live</span>' : `<span class="state">${esc((v.reason || 'no price').replace(/_/g, ' '))}</span>`;
+  return `<table><thead><tr><th><span class="label">Venue</span></th><th><span class="label">On a 6¢ scale</span></th><th><span class="label">With fees</span></th><th><span class="label">Ask</span></th><th><span class="label">Size</span></th><th><span class="label">Quote age</span></th><th></th></tr></thead><tbody>
+    ${o.venues.map(v => `<tr class="${o.best && v.venue === o.best.venue && v.state === 'live' ? 'is-best' : ''}"><td style="font-weight:600;white-space:nowrap">${esc(v.name)}</td><td>${cell(v)}</td><td class="num" style="white-space:nowrap">${v.withFees === null ? '<span class="dim">fee unknown</span>' : c1(v.withFees)}</td><td class="num ink2">${c1(v.ask)}</td><td class="num ink2">${size(v.size)}</td><td class="num ink2">${ago(v.asOf, now)}</td><td>${stateText(v)}</td></tr>`).join('')}</tbody></table>`;
+}
+function blockHtml(block, title) {
+  if (!block) return `<div class="box"><b>${esc(title)}</b><p class="note">No venue lists this for the game.</p></div>`;
+  return `<div class="box"><b style="font-size:18px">${esc(title)}</b> <span class="dim">· hold ${block.hold === null ? '–' : `${(block.hold * 100).toFixed(1)}%`}</span>
+    ${block.outcomes.map(o => `<div class="line-o"><span style="width:150px;font-weight:600">${esc(o.name === 'over' ? 'Over' : o.name === 'under' ? 'Under' : o.name)}</span><span class="price num" style="font-size:22px">${o.best ? c1(o.best.price) : '–'}</span><span class="venue">${o.best ? `<i></i>${esc(o.best.name)}` : ''}</span><span class="grow"></span><span class="sub num">fair ${c1(o.fair)} · edge ${signed(o.edge)} · ${o.liveVenues} live</span></div>`).join('')}</div>`;
+}
+function drawerHtml() {
+  const g = S.games.find(x => x.fixtureId === openId);
+  if (!g) return '';
+  const now = refTime(), d = detail[openId], arb = S.arbitrage, hit = arb?.onBoard.filter(r => r.fixtureId === openId) || [];
+  const spreadTitle = d?.spread ? `Spread · ${d.spread.lineTeam || ''} ${d.spread.line > 0 ? '+' : ''}${d.spread.line}` : 'Spread', totalTitle = d?.total ? `Total · ${d.total.line} points` : 'Total';
+  return `<button class="btn close" data-close>Close</button>
+    <span class="league" style="margin:0">${esc(g.league)}</span>
+    <h2 style="margin-top:8px">${esc(g.title)}</h2>
+    <div class="tag" style="margin-top:6px">${esc(kickoffLabel(g))} · ${esc(g.status)} · <b style="color:#fff">${g.liveVenues.length}</b> of ${g.listedVenues.length} venues have a live price ${g.wideBook ? '<span class="badge wide">Wide book</span>' : ''} ${g.alerts.length ? '<span class="badge alert">Alert</span> <span class="badge ind">Indicative</span>' : ''}</div>
+    <h3>Winner, venue by venue</h3><p class="mono src">${SCREEN}?competition=…&amp;marketType=${esc(g.marketType)} · read ${esc(stamp(S.lastRefresh))}</p>
+    ${g.outcomes.map(o => `<div class="oc"><div class="oc-head"><div class="team">${esc(o.name)}</div><div class="price num">${o.best ? `${o.best.price.toFixed(1)}<small>¢</small>` : '–'}</div>${o.best ? `<span class="venue"><i></i>best on ${esc(o.best.name)}</span>` : ''}<span class="grow"></span><span class="sub num">avg ${c1(o.avg)} · fair ${c1(o.fair)} · edge ${signed(o.edge)}${o.lead !== null ? ` · lead ${o.lead.toFixed(1)}¢` : ''}</span></div>${venueTable(o, now)}</div>`).join('')}
+    <p class="note">The hold on this game is <b style="color:#fff">${g.hold === null ? 'not available' : `${(g.hold * 100).toFixed(1)}%`}</b>${g.wideBook ? ', which is wide: at least one venue is quoting far from the others, so the average and the edge mean little here.' : '.'} Best, avg, fair, edge and hold are Predictefy's calculations. Lead is this bot's.</p>
+    <h3>Spread and total <span class="grow"></span>${d ? '' : `<button class="btn" id="loadLines" ${lineBusy || (S.replay && !S.details[openId]) ? 'disabled' : ''}>${lineBusy ? 'Loading…' : 'Load spread and total'}<small>${S.replay ? (S.details[openId] ? 'saved' : 'not in the saved board') : `${CREDITS.fixture} credits`}</small></button>`}</h3>
+    <p class="mono src">GET /v1/sports/fixtures/${esc(g.fixtureId)} · each market at its main line${d ? ` · read ${esc(stamp(d.readAt))}` : ''}</p>
+    ${d ? `<div class="lines">${blockHtml(d.spread, spreadTitle)}${blockHtml(d.total, totalTitle)}</div>` : ''}
+    <h3>Is any of this arbitrage?</h3><p class="mono src">GET /api/router/fetchArbitrage?executableOnly=true · ${CREDITS.arbitrage} credits · Builder plan and up</p>
+    ${S.gate && /fetchArbitrage/.test(S.gate.route) ? arbHtml() : `<div class="box"><p class="note" style="margin:0">${arb ? (hit.length ? `<b style="color:#fff">${hit.length} row${hit.length === 1 ? '' : 's'} for this game passed every gate</b> at ${esc(stamp(arb.checkedAt))}: ${hit.map(r => `${esc(venueName(r.buyYes))} against ${esc(venueName(r.buyNo))}, ${(r.roi * 100).toFixed(2)}% after fees on ${r.contracts} contracts`).join('; ')}. Check it again before acting.` : `Checked ${esc(stamp(arb.checkedAt))}: <b style="color:#fff">no row for this game passed the arbitrage check</b>. ${arb.passed} passed across all of Predictefy's markets and ${arb.sports} of those were sports. The gaps above are indicative price differences.`) : 'Not checked yet. Until the arbitrage check passes a row for this game, a gap between venues is an indicative price difference. Run the check from the Alerts tab.'}</p></div>`}`;
+}
+
+// ---- wiring ----
+function render() {
+  overview();
+  for (const b of document.querySelectorAll('#tabs button')) b.classList.toggle('on', b.dataset.tab === tab);
+  $('#main').innerHTML = tab === 'board' ? boardHtml() : tab === 'alerts' ? alertsHtml() : tab === 'read' ? readHtml() : settingsHtml();
+  renderDrawer();
+}
+function renderDrawer() {
+  const el = $('#drawer'), top = el.scrollTop;
+  el.innerHTML = openId ? drawerHtml() : '';
+  el.classList.toggle('open', Boolean(openId)); el.scrollTop = top;
+}
+async function post(path, body) {
+  const response = await fetch(path, {method: 'POST', headers: {'content-type': 'application/json'}, body: body ? JSON.stringify(body) : undefined});
+  return response.json();
+}
+let stampKey = '';
+async function load(force) {
+  try {
+    const next = await (await fetch('/api/state')).json();
+    const key = JSON.stringify([next.lastRefresh, next.busy, next.error, next.alerts.length, next.config, next.arbitrage?.checkedAt, next.gate?.at, next.counters.credits, next.leagueList.length]);
+    S = next;
+    if (force || key !== stampKey) { stampKey = key; render(); }
+  } catch { $('#status').textContent = 'The bot is not answering. Is it still running?'; $('#statusDot').className = 'dot bad'; }
+}
+function readDraft() {
+  for (const id of ['refreshMinutes', 'minVenues', 'minLeadCents', 'minSize']) { const el = document.getElementById(id); if (el) draft[id] = el.value; }
+  draft.leagues = [...document.querySelectorAll('[data-lg]:checked')].map(el => el.dataset.lg);
+}
+document.addEventListener('input', event => {
+  if (tab !== 'settings' || !event.target.closest('.settings')) return;
+  readDraft(); $('#costBox').innerHTML = costHtml(draft);
+});
+document.addEventListener('click', async event => {
+  const t = event.target;
+  const tabBtn = t.closest('[data-tab]'); if (tabBtn) { tab = tabBtn.dataset.tab; draft = null; render(); window.scrollTo(0, 0); return; }
+  if (t.closest('[data-close]')) { openId = null; renderDrawer(); return; }
+  const chip = t.closest('.chip');
+  if (chip) { if (chip.dataset.league) filter.league = chip.dataset.league; if (chip.dataset.when) filter.when = chip.dataset.when; if (chip.dataset.sort) filter.sort = chip.dataset.sort; if ('multi' in chip.dataset) filter.multi = !filter.multi; render(); return; }
+  if (t.closest('#refreshNow')) { $('#status').innerHTML = '<b>Reading prices…</b>'; await post('/api/refresh'); return load(true); }
+  if (t.closest('#arbRun')) { arbBusy = true; render(); await post('/api/arbitrage'); arbBusy = false; return load(true); }
+  if (t.closest('#loadLines')) { lineBusy = true; renderDrawer(); const r = await post(`/api/game?id=${encodeURIComponent(openId)}`); lineBusy = false; if (r.detail) detail[openId] = r.detail; await load(true); return; }
+  if (t.closest('#save')) {
+    readDraft();
+    const r = await post('/api/config', {refreshMinutes: Number(draft.refreshMinutes), minVenues: Number(draft.minVenues), minLeadCents: Number(draft.minLeadCents), minSize: Number(draft.minSize), leagues: draft.leagues});
+    draft = null; await load(true); const note = $('#saveNote'); if (note) note.textContent = r.error ? `Not saved: ${r.error}` : 'Saved.'; return;
+  }
+  if (t.closest('#reset')) { draft = null; render(); return; }
+  const game = t.closest('tbody.game');
+  if (game && !t.closest('a,button')) { openId = game.dataset.id; renderDrawer(); $('#drawer').scrollTop = 0; }
+});
+document.addEventListener('keydown', event => { if (event.key === 'Escape' && openId) { openId = null; renderDrawer(); } });
+const tip = $('#tip');
+document.addEventListener('pointermove', event => {
+  const mark = event.target.closest?.('[data-tip]');
+  if (!mark) { tip.style.display = 'none'; return; }
+  const [name, price, rest] = mark.dataset.tip.split('|');
+  tip.innerHTML = ''; const b = document.createElement('b'); b.textContent = `${price} · ${name}`; const s = document.createElement('span'); s.textContent = rest; s.className = 'ink2'; tip.append(b, s);
+  tip.style.display = 'block'; tip.style.left = `${Math.min(innerWidth - 340, event.clientX + 16)}px`; tip.style.top = `${event.clientY + 18}px`;
+});
+// A small handle for scripted walkthroughs and screenshots.
+window.board = {setTab: id => { tab = id; draft = null; render(); }, open: id => { openId = id; renderDrawer(); }, close: () => { openId = null; renderDrawer(); }, filter: patch => { Object.assign(filter, patch); render(); }, state: () => S};
+await load(true);
+setInterval(load, 4000);
+</script>
+</body>
+</html>

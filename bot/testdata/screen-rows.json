@@ -1,0 +1,1717 @@
+{
+ "note": "Three real rows from GET /v1/sports/screen, saved 2026-10-08 09:17 UTC.",
+ "tight": {
+  "fixtureId": "fx_4bed49d9e1c5",
+  "sport": "american_football",
+  "competition": {
+   "id": "comp_8e4533d68d39",
+   "name": "NFL",
+   "timeZone": "America/New_York"
+  },
+  "home": {
+   "id": "team_661512b491aa",
+   "name": "Dallas Cowboys"
+  },
+  "away": {
+   "id": "team_1a84ed9e8a3b",
+   "name": "Tampa Bay Buccaneers"
+  },
+  "teams": [
+   {
+    "id": "team_1a84ed9e8a3b",
+    "name": "Tampa Bay Buccaneers"
+   },
+   {
+    "id": "team_661512b491aa",
+    "name": "Dallas Cowboys"
+   }
+  ],
+  "kickoffAt": "2026-10-09T00:15:00.000Z",
+  "kickoffPrecision": "exact",
+  "eventDate": "2026-10-08",
+  "status": "scheduled",
+  "venues": [
+   "kalshi",
+   "novig",
+   "pascal",
+   "polymarket",
+   "polymarket_us",
+   "pred",
+   "predictfun",
+   "sxbet"
+  ],
+  "market": {
+   "marketType": "moneyline",
+   "period": "full",
+   "line": null,
+   "lineTeam": null,
+   "lines": [
+    {
+     "line": null,
+     "venues": [
+      "kalshi",
+      "novig",
+      "pascal",
+      "polymarket",
+      "polymarket_us",
+      "pred",
+      "predictfun",
+      "sxbet"
+     ]
+    }
+   ],
+   "selections": [
+    {
+     "selection": {
+      "key": "home",
+      "kind": "team",
+      "side": "home",
+      "team": {
+       "id": "team_661512b491aa",
+       "name": "Dallas Cowboys"
+      }
+     },
+     "cells": [
+      {
+       "venue": "kalshi",
+       "marketId": "KXNFLGAME-26OCT08TBDAL-DAL",
+       "outcomeId": "KXNFLGAME-26OCT08TBDAL-DAL",
+       "selection": "home",
+       "gross": {
+        "probability": 0.8,
+        "american": -400,
+        "decimal": 1.25
+       },
+       "grossReason": null,
+       "net": {
+        "probability": 0.8112,
+        "american": -430,
+        "decimal": 1.233
+       },
+       "feeBps": 112,
+       "feeUnknown": false,
+       "sizeAtPrice": 5100335.71,
+       "asOf": "2026-10-08T09:17:31.192Z",
+       "stale": false,
+       "source": "live"
+      },
+      {
+       "venue": "novig",
+       "marketId": "01a0ef14-1ede-7ed1-a0b3-31937270063d",
+       "outcomeId": "01a0ef14-1ede-7ed1-a0b3-31937270063d:01a0ef14-1ede-7ed1-a0b3-31a48318419c",
+       "selection": "home",
+       "gross": {
+        "probability": 0.805,
+        "american": -413,
+        "decimal": 1.242
+       },
+       "grossReason": null,
+       "net": {
+        "probability": 0.8097,
+        "american": -425,
+        "decimal": 1.235
+       },
+       "feeBps": 47,
+       "feeUnknown": false,
+       "sizeAtPrice": 6196.61,
+       "asOf": "2026-10-08T09:14:52.817Z",
+       "stale": true,
+       "source": "live"
+      },
+      {
+       "venue": "polymarket",
+       "marketId": "3951230",
+       "outcomeId": "66616602105135321479456151494379932980062039030841962258728108349184895983957",
+       "selection": "home",
+       "gross": {
+        "probability": 0.81,
+        "american": -426,
+        "decimal": 1.235
+       },
+       "grossReason": null,
+       "net": {
+        "probability": 0.8146,
+        "american": -439,
+        "decimal": 1.228
+       },
+       "feeBps": 46,
+       "feeUnknown": false,
+       "sizeAtPrice": 319824.88,
+       "asOf": "2026-10-08T09:17:29.793Z",
+       "stale": false,
+       "source": "live"
+      },
+      {
+       "venue": "polymarket_us",
+       "marketId": "aec-nfl-tb-dal-2026-10-08",
+       "outcomeId": "aec-nfl-tb-dal-2026-10-08:short",
+       "selection": "home",
+       "gross": {
+        "probability": 0.7975,
+        "american": -394,
+        "decimal": 1.254
+       },
+       "grossReason": null,
+       "net": null,
+       "feeBps": null,
+       "feeUnknown": true,
+       "sizeAtPrice": null,
+       "asOf": "2026-10-08T08:02:42.339Z",
+       "stale": false,
+       "source": "catalog"
+      },
+      {
+       "venue": "pred",
+       "marketId": "0x64be4072c34f5f47683457ecab63cdf9465b4d5d6a2d64dac497bf29bf8d51dc",
+       "outcomeId": "0x64be4072c34f5f47683457ecab63cdf9465b4d5d6a2d64dac497bf29bf8d51dc#0",
+       "selection": "home",
+       "gross": {
+        "probability": 0.809,
+        "american": -424,
+        "decimal": 1.236
+       },
+       "grossReason": null,
+       "net": {
+        "probability": 0.809,
+        "american": -424,
+        "decimal": 1.236
+       },
+       "feeBps": 0,
+       "feeUnknown": false,
+       "sizeAtPrice": 11452.8,
+       "asOf": "2026-10-08T09:00:07.522Z",
+       "stale": false,
+       "source": "live"
+      },
+      {
+       "venue": "predictfun",
+       "marketId": "1784504",
+       "outcomeId": "predictfun:1784504:2",
+       "selection": "home",
+       "gross": {
+        "probability": 0.81,
+        "american": -426,
+        "decimal": 1.235
+       },
+       "grossReason": null,
+       "net": {
+        "probability": 0.8138,
+        "american": -437,
+        "decimal": 1.229
+       },
+       "feeBps": 38,
+       "feeUnknown": false,
+       "sizeAtPrice": 6417.419753086419,
+       "asOf": "2026-10-08T09:17:30.849Z",
+       "stale": false,
+       "source": "live"
+      },
+      {
+       "venue": "sxbet",
+       "marketId": "0xf9cf53c61fdda42575900e5101e6dcd3172c3245c6f5e3dbc2f4d08bdaf63fe3",
+       "outcomeId": "0xf9cf53c61fdda42575900e5101e6dcd3172c3245c6f5e3dbc2f4d08bdaf63fe3#0",
+       "selection": "home",
+       "gross": {
+        "probability": 0.805,
+        "american": -413,
+        "decimal": 1.242
+       },
+       "grossReason": null,
+       "net": {
+        "probability": 0.805,
+        "american": -413,
+        "decimal": 1.242
+       },
+       "feeBps": 0,
+       "feeUnknown": false,
+       "sizeAtPrice": 112.7,
+       "asOf": "2026-10-08T09:16:49.333Z",
+       "stale": false,
+       "source": "live"
+      }
+     ],
+     "best": {
+      "venue": "sxbet",
+      "marketId": "0xf9cf53c61fdda42575900e5101e6dcd3172c3245c6f5e3dbc2f4d08bdaf63fe3",
+      "outcomeId": "0xf9cf53c61fdda42575900e5101e6dcd3172c3245c6f5e3dbc2f4d08bdaf63fe3#0",
+      "selection": "home",
+      "gross": {
+       "probability": 0.805,
+       "american": -413,
+       "decimal": 1.242
+      },
+      "grossReason": null,
+      "net": {
+       "probability": 0.805,
+       "american": -413,
+       "decimal": 1.242
+      },
+      "feeBps": 0,
+      "feeUnknown": false,
+      "sizeAtPrice": 112.7,
+      "asOf": "2026-10-08T09:16:49.333Z",
+      "stale": false,
+      "source": "live"
+     },
+     "avg": {
+      "probability": 0.8068,
+      "american": -418,
+      "decimal": 1.239
+     },
+     "fair": {
+      "probability": 0.8002,
+      "american": -401,
+      "decimal": 1.25
+     },
+     "edge": -0.006,
+     "edgeOnGross": false
+    },
+    {
+     "selection": {
+      "key": "away",
+      "kind": "team",
+      "side": "away",
+      "team": {
+       "id": "team_1a84ed9e8a3b",
+       "name": "Tampa Bay Buccaneers"
+      }
+     },
+     "cells": [
+      {
+       "venue": "kalshi",
+       "marketId": "KXNFLGAME-26OCT08TBDAL-TB",
+       "outcomeId": "KXNFLGAME-26OCT08TBDAL-TB",
+       "selection": "away",
+       "gross": {
+        "probability": 0.21,
+        "american": 376,
+        "decimal": 4.762
+       },
+       "grossReason": null,
+       "net": {
+        "probability": 0.2217,
+        "american": 351,
+        "decimal": 4.511
+       },
+       "feeBps": 117,
+       "feeUnknown": false,
+       "sizeAtPrice": 11259504.23,
+       "asOf": "2026-10-08T09:17:29.323Z",
+       "stale": false,
+       "source": "live"
+      },
+      {
+       "venue": "novig",
+       "marketId": "01a0ef14-1ede-7ed1-a0b3-31937270063d",
+       "outcomeId": "01a0ef14-1ede-7ed1-a0b3-31937270063d:01a0ef14-1ede-7ed1-a0b3-31b89f46c2a7",
+       "selection": "away",
+       "gross": {
+        "probability": 0.205,
+        "american": 388,
+        "decimal": 4.878
+       },
+       "grossReason": null,
+       "net": {
+        "probability": 0.2099,
+        "american": 376,
+        "decimal": 4.764
+       },
+       "feeBps": 49,
+       "feeUnknown": false,
+       "sizeAtPrice": 6314.1,
+       "asOf": "2026-10-08T09:14:55.152Z",
+       "stale": true,
+       "source": "live"
+      },
+      {
+       "venue": "pascal",
+       "marketId": "NFL_26OCT08_TBDAL_ML.TB",
+       "outcomeId": "NFL_26OCT08_TBDAL_ML.TB#0",
+       "selection": "away",
+       "gross": {
+        "probability": 0.2,
+        "american": 400,
+        "decimal": 5
+       },
+       "grossReason": null,
+       "net": {
+        "probability": 0.204,
+        "american": 390,
+        "decimal": 4.902
+       },
+       "feeBps": 40,
+       "feeUnknown": false,
+       "sizeAtPrice": 4951,
+       "asOf": "2026-10-08T09:17:28.782Z",
+       "stale": false,
+       "source": "live"
+      },
+      {
+       "venue": "polymarket",
+       "marketId": "3951230",
+       "outcomeId": "41073895388163492044683513841262626450248745686629069268834561009386173172680",
+       "selection": "away",
+       "gross": {
+        "probability": 0.2,
+        "american": 400,
+        "decimal": 5
+       },
+       "grossReason": null,
+       "net": {
+        "probability": 0.2048,
+        "american": 388,
+        "decimal": 4.883
+       },
+       "feeBps": 48,
+       "feeUnknown": false,
+       "sizeAtPrice": 330081.9,
+       "asOf": "2026-10-08T09:17:29.793Z",
+       "stale": false,
+       "source": "live"
+      },
+      {
+       "venue": "polymarket_us",
+       "marketId": "aec-nfl-tb-dal-2026-10-08",
+       "outcomeId": "aec-nfl-tb-dal-2026-10-08:long",
+       "selection": "away",
+       "gross": {
+        "probability": 0.2025,
+        "american": 394,
+        "decimal": 4.938
+       },
+       "grossReason": null,
+       "net": null,
+       "feeBps": null,
+       "feeUnknown": true,
+       "sizeAtPrice": null,
+       "asOf": "2026-10-08T08:02:42.339Z",
+       "stale": false,
+       "source": "catalog"
+      },
+      {
+       "venue": "predictfun",
+       "marketId": "1784504",
+       "outcomeId": "predictfun:1784504:1",
+       "selection": "away",
+       "gross": {
+        "probability": 0.2,
+        "american": 400,
+        "decimal": 5
+       },
+       "grossReason": null,
+       "net": {
+        "probability": 0.204,
+        "american": 390,
+        "decimal": 4.902
+       },
+       "feeBps": 40,
+       "feeUnknown": false,
+       "sizeAtPrice": 2673.5001,
+       "asOf": "2026-10-08T09:17:30.849Z",
+       "stale": false,
+       "source": "live"
+      },
+      {
+       "venue": "sxbet",
+       "marketId": "0xf9cf53c61fdda42575900e5101e6dcd3172c3245c6f5e3dbc2f4d08bdaf63fe3",
+       "outcomeId": "0xf9cf53c61fdda42575900e5101e6dcd3172c3245c6f5e3dbc2f4d08bdaf63fe3#1",
+       "selection": "away",
+       "gross": {
+        "probability": 0.1975,
+        "american": 406,
+        "decimal": 5.063
+       },
+       "grossReason": null,
+       "net": {
+        "probability": 0.1975,
+        "american": 406,
+        "decimal": 5.063
+       },
+       "feeBps": 0,
+       "feeUnknown": false,
+       "sizeAtPrice": 3.689999,
+       "asOf": "2026-10-08T09:16:49.333Z",
+       "stale": false,
+       "source": "live"
+      }
+     ],
+     "best": {
+      "venue": "sxbet",
+      "marketId": "0xf9cf53c61fdda42575900e5101e6dcd3172c3245c6f5e3dbc2f4d08bdaf63fe3",
+      "outcomeId": "0xf9cf53c61fdda42575900e5101e6dcd3172c3245c6f5e3dbc2f4d08bdaf63fe3#1",
+      "selection": "away",
+      "gross": {
+       "probability": 0.1975,
+       "american": 406,
+       "decimal": 5.063
+      },
+      "grossReason": null,
+      "net": {
+       "probability": 0.1975,
+       "american": 406,
+       "decimal": 5.063
+      },
+      "feeBps": 0,
+      "feeUnknown": false,
+      "sizeAtPrice": 3.689999,
+      "asOf": "2026-10-08T09:16:49.333Z",
+      "stale": false,
+      "source": "live"
+     },
+     "avg": {
+      "probability": 0.2015,
+      "american": 396,
+      "decimal": 4.963
+     },
+     "fair": {
+      "probability": 0.1998,
+      "american": 401,
+      "decimal": 5.005
+     },
+     "edge": 0.0119,
+     "edgeOnGross": false
+    }
+   ],
+   "hold": {
+    "average": 0.0083,
+    "byVenue": {
+     "kalshi": 0.01,
+     "polymarket": 0.01,
+     "predictfun": 0.01,
+     "sxbet": 0.0025
+    }
+   }
+  }
+ },
+ "alert": {
+  "fixtureId": "fx_ffec09e163a6",
+  "sport": "american_football",
+  "competition": {
+   "id": "comp_8e4533d68d39",
+   "name": "NFL",
+   "timeZone": "America/New_York"
+  },
+  "home": {
+   "id": "team_4139c9754838",
+   "name": "New England Patriots"
+  },
+  "away": {
+   "id": "team_8bdff96c378a",
+   "name": "Las Vegas Raiders"
+  },
+  "teams": [
+   {
+    "id": "team_4139c9754838",
+    "name": "New England Patriots"
+   },
+   {
+    "id": "team_8bdff96c378a",
+    "name": "Las Vegas Raiders"
+   }
+  ],
+  "kickoffAt": "2026-10-11T17:00:00.000Z",
+  "kickoffPrecision": "exact",
+  "eventDate": "2026-10-11",
+  "status": "scheduled",
+  "venues": [
+   "kalshi",
+   "novig",
+   "pascal",
+   "polymarket",
+   "polymarket_us",
+   "pred",
+   "predictfun",
+   "sxbet"
+  ],
+  "market": {
+   "marketType": "moneyline",
+   "period": "full",
+   "line": null,
+   "lineTeam": null,
+   "lines": [
+    {
+     "line": null,
+     "venues": [
+      "kalshi",
+      "novig",
+      "pascal",
+      "polymarket",
+      "polymarket_us",
+      "pred",
+      "predictfun",
+      "sxbet"
+     ]
+    }
+   ],
+   "selections": [
+    {
+     "selection": {
+      "key": "home",
+      "kind": "team",
+      "side": "home",
+      "team": {
+       "id": "team_4139c9754838",
+       "name": "New England Patriots"
+      }
+     },
+     "cells": [
+      {
+       "venue": "kalshi",
+       "marketId": "KXNFLGAME-26OCT11LVNE-NE",
+       "outcomeId": "KXNFLGAME-26OCT11LVNE-NE",
+       "selection": "home",
+       "gross": {
+        "probability": 0.64,
+        "american": -178,
+        "decimal": 1.563
+       },
+       "grossReason": null,
+       "net": null,
+       "feeBps": null,
+       "feeUnknown": true,
+       "sizeAtPrice": null,
+       "asOf": "2026-10-08T08:27:00.996Z",
+       "stale": false,
+       "source": "catalog"
+      },
+      {
+       "venue": "novig",
+       "marketId": "01a0ef14-216c-75c0-b2c1-bb683917bfce",
+       "outcomeId": "01a0ef14-216c-75c0-b2c1-bb683917bfce:01a0ef14-216c-75c0-b2c1-bb7a7ff407fb",
+       "selection": "home",
+       "gross": {
+        "probability": 0.635,
+        "american": -174,
+        "decimal": 1.575
+       },
+       "grossReason": null,
+       "net": {
+        "probability": 0.642,
+        "american": -179,
+        "decimal": 1.558
+       },
+       "feeBps": 70,
+       "feeUnknown": false,
+       "sizeAtPrice": 41095.88,
+       "asOf": "2026-10-08T09:15:40.948Z",
+       "stale": false,
+       "source": "live"
+      },
+      {
+       "venue": "polymarket",
+       "marketId": "4024660",
+       "outcomeId": "98346236258858495114024511207702029843871857298628858928602647328426022052347",
+       "selection": "home",
+       "gross": {
+        "probability": 0.625,
+        "american": -167,
+        "decimal": 1.6
+       },
+       "grossReason": null,
+       "net": null,
+       "feeBps": null,
+       "feeUnknown": true,
+       "sizeAtPrice": null,
+       "asOf": "2026-10-08T08:27:51.804Z",
+       "stale": false,
+       "source": "catalog"
+      },
+      {
+       "venue": "polymarket_us",
+       "marketId": "aec-nfl-lv-ne-2026-10-11",
+       "outcomeId": "aec-nfl-lv-ne-2026-10-11:short",
+       "selection": "home",
+       "gross": {
+        "probability": 0.63,
+        "american": -170,
+        "decimal": 1.587
+       },
+       "grossReason": null,
+       "net": null,
+       "feeBps": null,
+       "feeUnknown": true,
+       "sizeAtPrice": null,
+       "asOf": "2026-10-08T06:03:22.704Z",
+       "stale": false,
+       "source": "catalog"
+      },
+      {
+       "venue": "pred",
+       "marketId": "0x7d3dc809396bd220e1a95c3d4eeade83ac8a4d561222e96b5caa6242b7ec59a1",
+       "outcomeId": "0x7d3dc809396bd220e1a95c3d4eeade83ac8a4d561222e96b5caa6242b7ec59a1#0",
+       "selection": "home",
+       "gross": {
+        "probability": 0.639,
+        "american": -177,
+        "decimal": 1.565
+       },
+       "grossReason": null,
+       "net": {
+        "probability": 0.639,
+        "american": -177,
+        "decimal": 1.565
+       },
+       "feeBps": 0,
+       "feeUnknown": false,
+       "sizeAtPrice": 6862.7,
+       "asOf": "2026-10-08T09:12:13.331Z",
+       "stale": false,
+       "source": "live"
+      },
+      {
+       "venue": "predictfun",
+       "marketId": "1852265",
+       "outcomeId": "predictfun:1852265:2",
+       "selection": "home",
+       "gross": {
+        "probability": 0.63,
+        "american": -170,
+        "decimal": 1.587
+       },
+       "grossReason": null,
+       "net": {
+        "probability": 0.6374,
+        "american": -176,
+        "decimal": 1.569
+       },
+       "feeBps": 74,
+       "feeUnknown": false,
+       "sizeAtPrice": 800,
+       "asOf": "2026-10-08T09:17:00.575Z",
+       "stale": false,
+       "source": "live"
+      },
+      {
+       "venue": "sxbet",
+       "marketId": "0x7cde900eb3702c97e6dda9f46fd1eb11816a50fa6298e30bab9f7fece781b82b",
+       "outcomeId": "0x7cde900eb3702c97e6dda9f46fd1eb11816a50fa6298e30bab9f7fece781b82b#0",
+       "selection": "home",
+       "gross": {
+        "probability": 0.63,
+        "american": -170,
+        "decimal": 1.587
+       },
+       "grossReason": null,
+       "net": {
+        "probability": 0.63,
+        "american": -170,
+        "decimal": 1.587
+       },
+       "feeBps": 0,
+       "feeUnknown": false,
+       "sizeAtPrice": 56.972432,
+       "asOf": "2026-10-08T09:16:41.999Z",
+       "stale": false,
+       "source": "live"
+      }
+     ],
+     "best": {
+      "venue": "sxbet",
+      "marketId": "0x7cde900eb3702c97e6dda9f46fd1eb11816a50fa6298e30bab9f7fece781b82b",
+      "outcomeId": "0x7cde900eb3702c97e6dda9f46fd1eb11816a50fa6298e30bab9f7fece781b82b#0",
+      "selection": "home",
+      "gross": {
+       "probability": 0.63,
+       "american": -170,
+       "decimal": 1.587
+      },
+      "grossReason": null,
+      "net": {
+       "probability": 0.63,
+       "american": -170,
+       "decimal": 1.587
+      },
+      "feeBps": 0,
+      "feeUnknown": false,
+      "sizeAtPrice": 56.972432,
+      "asOf": "2026-10-08T09:16:41.999Z",
+      "stale": false,
+      "source": "live"
+     },
+     "avg": {
+      "probability": 0.6335,
+      "american": -173,
+      "decimal": 1.579
+     },
+     "fair": {
+      "probability": 0.6262,
+      "american": -168,
+      "decimal": 1.597
+     },
+     "edge": -0.006,
+     "edgeOnGross": false
+    },
+    {
+     "selection": {
+      "key": "away",
+      "kind": "team",
+      "side": "away",
+      "team": {
+       "id": "team_8bdff96c378a",
+       "name": "Las Vegas Raiders"
+      }
+     },
+     "cells": [
+      {
+       "venue": "kalshi",
+       "marketId": "KXNFLGAME-26OCT11LVNE-LV",
+       "outcomeId": "KXNFLGAME-26OCT11LVNE-LV",
+       "selection": "away",
+       "gross": {
+        "probability": 0.38,
+        "american": 163,
+        "decimal": 2.632
+       },
+       "grossReason": null,
+       "net": null,
+       "feeBps": null,
+       "feeUnknown": true,
+       "sizeAtPrice": null,
+       "asOf": "2026-10-08T08:27:00.996Z",
+       "stale": false,
+       "source": "catalog"
+      },
+      {
+       "venue": "novig",
+       "marketId": "01a0ef14-216c-75c0-b2c1-bb683917bfce",
+       "outcomeId": "01a0ef14-216c-75c0-b2c1-bb683917bfce:01a0ef14-216c-75c0-b2c1-bb88570506d1",
+       "selection": "away",
+       "gross": {
+        "probability": 0.38,
+        "american": 163,
+        "decimal": 2.632
+       },
+       "grossReason": null,
+       "net": {
+        "probability": 0.3871,
+        "american": 158,
+        "decimal": 2.583
+       },
+       "feeBps": 71,
+       "feeUnknown": false,
+       "sizeAtPrice": 110.26,
+       "asOf": "2026-10-08T09:15:42.422Z",
+       "stale": false,
+       "source": "live"
+      },
+      {
+       "venue": "pascal",
+       "marketId": "NFL_26OCT11_LVNE_ML.LV",
+       "outcomeId": "NFL_26OCT11_LVNE_ML.LV#0",
+       "selection": "away",
+       "gross": {
+        "probability": 0.38,
+        "american": 163,
+        "decimal": 2.632
+       },
+       "grossReason": null,
+       "net": {
+        "probability": 0.3876,
+        "american": 158,
+        "decimal": 2.58
+       },
+       "feeBps": 76,
+       "feeUnknown": false,
+       "sizeAtPrice": 4961,
+       "asOf": "2026-10-08T09:17:28.630Z",
+       "stale": false,
+       "source": "live"
+      },
+      {
+       "venue": "polymarket",
+       "marketId": "4024660",
+       "outcomeId": "73681579503027371895785272741642527204423030110930733585908486253810456427894",
+       "selection": "away",
+       "gross": {
+        "probability": 0.375,
+        "american": 167,
+        "decimal": 2.667
+       },
+       "grossReason": null,
+       "net": null,
+       "feeBps": null,
+       "feeUnknown": true,
+       "sizeAtPrice": null,
+       "asOf": "2026-10-08T08:27:51.804Z",
+       "stale": false,
+       "source": "catalog"
+      },
+      {
+       "venue": "polymarket_us",
+       "marketId": "aec-nfl-lv-ne-2026-10-11",
+       "outcomeId": "aec-nfl-lv-ne-2026-10-11:long",
+       "selection": "away",
+       "gross": {
+        "probability": 0.37,
+        "american": 170,
+        "decimal": 2.703
+       },
+       "grossReason": null,
+       "net": null,
+       "feeBps": null,
+       "feeUnknown": true,
+       "sizeAtPrice": null,
+       "asOf": "2026-10-08T06:03:22.704Z",
+       "stale": false,
+       "source": "catalog"
+      },
+      {
+       "venue": "predictfun",
+       "marketId": "1852265",
+       "outcomeId": "predictfun:1852265:1",
+       "selection": "away",
+       "gross": {
+        "probability": 0.38,
+        "american": 163,
+        "decimal": 2.632
+       },
+       "grossReason": null,
+       "net": {
+        "probability": 0.3876,
+        "american": 158,
+        "decimal": 2.58
+       },
+       "feeBps": 76,
+       "feeUnknown": false,
+       "sizeAtPrice": 800,
+       "asOf": "2026-10-08T09:17:00.575Z",
+       "stale": false,
+       "source": "live"
+      },
+      {
+       "venue": "sxbet",
+       "marketId": "0x7cde900eb3702c97e6dda9f46fd1eb11816a50fa6298e30bab9f7fece781b82b",
+       "outcomeId": "0x7cde900eb3702c97e6dda9f46fd1eb11816a50fa6298e30bab9f7fece781b82b#1",
+       "selection": "away",
+       "gross": {
+        "probability": 0.3725,
+        "american": 168,
+        "decimal": 2.685
+       },
+       "grossReason": null,
+       "net": {
+        "probability": 0.3725,
+        "american": 168,
+        "decimal": 2.685
+       },
+       "feeBps": 0,
+       "feeUnknown": false,
+       "sizeAtPrice": 81.95,
+       "asOf": "2026-10-08T09:16:41.999Z",
+       "stale": false,
+       "source": "live"
+      }
+     ],
+     "best": {
+      "venue": "sxbet",
+      "marketId": "0x7cde900eb3702c97e6dda9f46fd1eb11816a50fa6298e30bab9f7fece781b82b",
+      "outcomeId": "0x7cde900eb3702c97e6dda9f46fd1eb11816a50fa6298e30bab9f7fece781b82b#1",
+      "selection": "away",
+      "gross": {
+       "probability": 0.3725,
+       "american": 168,
+       "decimal": 2.685
+      },
+      "grossReason": null,
+      "net": {
+       "probability": 0.3725,
+       "american": 168,
+       "decimal": 2.685
+      },
+      "feeBps": 0,
+      "feeUnknown": false,
+      "sizeAtPrice": 81.95,
+      "asOf": "2026-10-08T09:16:41.999Z",
+      "stale": false,
+      "source": "live"
+     },
+     "avg": {
+      "probability": 0.3781,
+      "american": 164,
+      "decimal": 2.645
+     },
+     "fair": {
+      "probability": 0.3738,
+      "american": 168,
+      "decimal": 2.675
+     },
+     "edge": 0.0034,
+     "edgeOnGross": false
+    }
+   ],
+   "hold": {
+    "average": 0.0116,
+    "byVenue": {
+     "novig": 0.015,
+     "predictfun": 0.01,
+     "sxbet": 0.0025
+    }
+   }
+  }
+ },
+ "wide": {
+  "fixtureId": "fx_a26bb3d5fe08",
+  "sport": "american_football",
+  "competition": {
+   "id": "comp_e594801ca9f1",
+   "name": "College Football",
+   "timeZone": "America/New_York"
+  },
+  "home": {
+   "id": "team_267cca38c409",
+   "name": "Mean Green"
+  },
+  "away": {
+   "id": "team_4b8ba70191bb",
+   "name": "49ers"
+  },
+  "teams": [
+   {
+    "id": "team_267cca38c409",
+    "name": "Mean Green"
+   },
+   {
+    "id": "team_4b8ba70191bb",
+    "name": "49ers"
+   }
+  ],
+  "kickoffAt": "2026-10-10T19:30:00.000Z",
+  "kickoffPrecision": "exact",
+  "eventDate": "2026-10-10",
+  "status": "scheduled",
+  "venues": [
+   "kalshi",
+   "novig",
+   "polymarket",
+   "polymarket_us",
+   "predictfun",
+   "sxbet"
+  ],
+  "market": {
+   "marketType": "moneyline",
+   "period": "full",
+   "line": null,
+   "lineTeam": null,
+   "lines": [
+    {
+     "line": null,
+     "venues": [
+      "kalshi",
+      "novig",
+      "polymarket",
+      "polymarket_us",
+      "predictfun",
+      "sxbet"
+     ]
+    }
+   ],
+   "selections": [
+    {
+     "selection": {
+      "key": "home",
+      "kind": "team",
+      "side": "home",
+      "team": {
+       "id": "team_267cca38c409",
+       "name": "Mean Green"
+      }
+     },
+     "cells": [
+      {
+       "venue": "kalshi",
+       "marketId": "KXNCAAFGAME-26OCT10CHARUNT-UNT",
+       "outcomeId": "KXNCAAFGAME-26OCT10CHARUNT-UNT",
+       "selection": "home",
+       "gross": {
+        "probability": 0.97,
+        "american": -3233,
+        "decimal": 1.031
+       },
+       "grossReason": null,
+       "net": {
+        "probability": 0.9721,
+        "american": -3484,
+        "decimal": 1.029
+       },
+       "feeBps": 21,
+       "feeUnknown": false,
+       "sizeAtPrice": 11140.03,
+       "asOf": "2026-10-08T09:15:15.279Z",
+       "stale": false,
+       "source": "live"
+      },
+      {
+       "venue": "novig",
+       "marketId": "01a1078c-273b-70e2-90bd-4f229cded427",
+       "outcomeId": "01a1078c-273b-70e2-90bd-4f229cded427:01a1078c-273b-70e2-90bd-4f3adfef5291",
+       "selection": "home",
+       "gross": {
+        "probability": 0.969,
+        "american": -3126,
+        "decimal": 1.032
+       },
+       "grossReason": null,
+       "net": {
+        "probability": 0.9699,
+        "american": -3222,
+        "decimal": 1.031
+       },
+       "feeBps": 9,
+       "feeUnknown": false,
+       "sizeAtPrice": 1997,
+       "asOf": "2026-10-08T09:16:15.236Z",
+       "stale": false,
+       "source": "live"
+      },
+      {
+       "venue": "polymarket",
+       "marketId": "5098823",
+       "outcomeId": "84085028520724919524962298560231188752798796159533222085447498093665917615968",
+       "selection": "home",
+       "gross": {
+        "probability": 0.967,
+        "american": -2930,
+        "decimal": 1.034
+       },
+       "grossReason": null,
+       "net": null,
+       "feeBps": null,
+       "feeUnknown": true,
+       "sizeAtPrice": null,
+       "asOf": "2026-10-08T08:27:51.804Z",
+       "stale": false,
+       "source": "catalog"
+      },
+      {
+       "venue": "polymarket_us",
+       "marketId": "aec-cfb-charlt-ntx-2026-10-10",
+       "outcomeId": "aec-cfb-charlt-ntx-2026-10-10:short",
+       "selection": "home",
+       "gross": {
+        "probability": 0.965,
+        "american": -2757,
+        "decimal": 1.036
+       },
+       "grossReason": null,
+       "net": null,
+       "feeBps": null,
+       "feeUnknown": true,
+       "sizeAtPrice": null,
+       "asOf": "2026-10-08T08:02:42.339Z",
+       "stale": false,
+       "source": "catalog"
+      },
+      {
+       "venue": "predictfun",
+       "marketId": "2751917",
+       "outcomeId": "predictfun:2751917:2",
+       "selection": "home",
+       "gross": {
+        "probability": 0.98,
+        "american": -4900,
+        "decimal": 1.02
+       },
+       "grossReason": null,
+       "net": {
+        "probability": 0.9804,
+        "american": -5002,
+        "decimal": 1.02
+       },
+       "feeBps": 4,
+       "feeUnknown": false,
+       "sizeAtPrice": 88,
+       "asOf": "2026-10-08T09:16:31.536Z",
+       "stale": false,
+       "source": "live"
+      },
+      {
+       "venue": "sxbet",
+       "marketId": "0xb3850ef54c9f2904e6c2dcb394d95d45c5459464954e1d749b8c3f53973ab094",
+       "outcomeId": "0xb3850ef54c9f2904e6c2dcb394d95d45c5459464954e1d749b8c3f53973ab094#0",
+       "selection": "home",
+       "gross": {
+        "probability": 0.985,
+        "american": -6567,
+        "decimal": 1.015
+       },
+       "grossReason": null,
+       "net": {
+        "probability": 0.985,
+        "american": -6567,
+        "decimal": 1.015
+       },
+       "feeBps": 0,
+       "feeUnknown": false,
+       "sizeAtPrice": 1097.29,
+       "asOf": "2026-10-08T09:16:52.033Z",
+       "stale": false,
+       "source": "live"
+      }
+     ],
+     "best": {
+      "venue": "novig",
+      "marketId": "01a1078c-273b-70e2-90bd-4f229cded427",
+      "outcomeId": "01a1078c-273b-70e2-90bd-4f229cded427:01a1078c-273b-70e2-90bd-4f3adfef5291",
+      "selection": "home",
+      "gross": {
+       "probability": 0.969,
+       "american": -3126,
+       "decimal": 1.032
+      },
+      "grossReason": null,
+      "net": {
+       "probability": 0.9699,
+       "american": -3222,
+       "decimal": 1.031
+      },
+      "feeBps": 9,
+      "feeUnknown": false,
+      "sizeAtPrice": 1997,
+      "asOf": "2026-10-08T09:16:15.236Z",
+      "stale": false,
+      "source": "live"
+     },
+     "avg": {
+      "probability": 0.976,
+      "american": -4067,
+      "decimal": 1.025
+     },
+     "fair": {
+      "probability": 0.7884,
+      "american": -373,
+      "decimal": 1.268
+     },
+     "edge": -0.1872,
+     "edgeOnGross": false
+    },
+    {
+     "selection": {
+      "key": "away",
+      "kind": "team",
+      "side": "away",
+      "team": {
+       "id": "team_4b8ba70191bb",
+       "name": "49ers"
+      }
+     },
+     "cells": [
+      {
+       "venue": "kalshi",
+       "marketId": "KXNCAAFGAME-26OCT10CHARUNT-CHAR",
+       "outcomeId": "KXNCAAFGAME-26OCT10CHARUNT-CHAR",
+       "selection": "away",
+       "gross": {
+        "probability": 0.04,
+        "american": 2400,
+        "decimal": 25
+       },
+       "grossReason": null,
+       "net": {
+        "probability": 0.0427,
+        "american": 2242,
+        "decimal": 23.419
+       },
+       "feeBps": 27,
+       "feeUnknown": false,
+       "sizeAtPrice": 74493.15,
+       "asOf": "2026-10-08T09:15:15.282Z",
+       "stale": false,
+       "source": "live"
+      },
+      {
+       "venue": "novig",
+       "marketId": "01a1078c-273b-70e2-90bd-4f229cded427",
+       "outcomeId": "01a1078c-273b-70e2-90bd-4f229cded427:01a1078c-273b-70e2-90bd-4f4fc8bbe82a",
+       "selection": "away",
+       "gross": {
+        "probability": 0.038,
+        "american": 2532,
+        "decimal": 26.316
+       },
+       "grossReason": null,
+       "net": {
+        "probability": 0.0391,
+        "american": 2458,
+        "decimal": 25.575
+       },
+       "feeBps": 11,
+       "feeUnknown": false,
+       "sizeAtPrice": 3000,
+       "asOf": "2026-10-08T09:16:16.253Z",
+       "stale": false,
+       "source": "live"
+      },
+      {
+       "venue": "polymarket",
+       "marketId": "5098823",
+       "outcomeId": "74214013854167905492221467045254431304142292041110436720230985282005566418206",
+       "selection": "away",
+       "gross": {
+        "probability": 0.033,
+        "american": 2930,
+        "decimal": 30.303
+       },
+       "grossReason": null,
+       "net": null,
+       "feeBps": null,
+       "feeUnknown": true,
+       "sizeAtPrice": null,
+       "asOf": "2026-10-08T08:27:51.804Z",
+       "stale": false,
+       "source": "catalog"
+      },
+      {
+       "venue": "polymarket_us",
+       "marketId": "aec-cfb-charlt-ntx-2026-10-10",
+       "outcomeId": "aec-cfb-charlt-ntx-2026-10-10:long",
+       "selection": "away",
+       "gross": {
+        "probability": 0.035,
+        "american": 2757,
+        "decimal": 28.571
+       },
+       "grossReason": null,
+       "net": null,
+       "feeBps": null,
+       "feeUnknown": true,
+       "sizeAtPrice": null,
+       "asOf": "2026-10-08T08:02:42.339Z",
+       "stale": false,
+       "source": "catalog"
+      },
+      {
+       "venue": "predictfun",
+       "marketId": "2751917",
+       "outcomeId": "predictfun:2751917:1",
+       "selection": "away",
+       "gross": {
+        "probability": 0.93,
+        "american": -1329,
+        "decimal": 1.075
+       },
+       "grossReason": null,
+       "net": {
+        "probability": 0.9314,
+        "american": -1358,
+        "decimal": 1.074
+       },
+       "feeBps": 14,
+       "feeUnknown": false,
+       "sizeAtPrice": 215,
+       "asOf": "2026-10-08T09:16:31.536Z",
+       "stale": false,
+       "source": "live"
+      },
+      {
+       "venue": "sxbet",
+       "marketId": "0xb3850ef54c9f2904e6c2dcb394d95d45c5459464954e1d749b8c3f53973ab094",
+       "outcomeId": "0xb3850ef54c9f2904e6c2dcb394d95d45c5459464954e1d749b8c3f53973ab094#1",
+       "selection": "away",
+       "gross": {
+        "probability": 0.04,
+        "american": 2400,
+        "decimal": 25
+       },
+       "grossReason": null,
+       "net": {
+        "probability": 0.04,
+        "american": 2400,
+        "decimal": 25
+       },
+       "feeBps": 0,
+       "feeUnknown": false,
+       "sizeAtPrice": 6.364583,
+       "asOf": "2026-10-08T09:16:52.033Z",
+       "stale": false,
+       "source": "live"
+      }
+     ],
+     "best": {
+      "venue": "novig",
+      "marketId": "01a1078c-273b-70e2-90bd-4f229cded427",
+      "outcomeId": "01a1078c-273b-70e2-90bd-4f229cded427:01a1078c-273b-70e2-90bd-4f4fc8bbe82a",
+      "selection": "away",
+      "gross": {
+       "probability": 0.038,
+       "american": 2532,
+       "decimal": 26.316
+      },
+      "grossReason": null,
+      "net": {
+       "probability": 0.0391,
+       "american": 2458,
+       "decimal": 25.575
+      },
+      "feeBps": 11,
+      "feeUnknown": false,
+      "sizeAtPrice": 3000,
+      "asOf": "2026-10-08T09:16:16.253Z",
+      "stale": false,
+      "source": "live"
+     },
+     "avg": {
+      "probability": 0.262,
+      "american": 282,
+      "decimal": 3.817
+     },
+     "fair": {
+      "probability": 0.2116,
+      "american": 373,
+      "decimal": 4.726
+     },
+     "edge": 4.4126,
+     "edgeOnGross": false
+    }
+   ],
+   "hold": {
+    "average": 0.238,
+    "byVenue": {
+     "kalshi": 0.01,
+     "novig": 0.007,
+     "predictfun": 0.91,
+     "sxbet": 0.025
+    }
+   }
+  }
+ },
+ "oneSided": {
+  "fixtureId": "fx_c9eeae8c1594",
+  "sport": "american_football",
+  "competition": {
+   "id": "comp_e594801ca9f1",
+   "name": "College Football",
+   "timeZone": "America/New_York"
+  },
+  "home": {
+   "id": "team_dc96b0f629ac",
+   "name": "Fighting Irish"
+  },
+  "away": {
+   "id": "team_c88cad627f3f",
+   "name": "Cardinal"
+  },
+  "teams": [
+   {
+    "id": "team_c88cad627f3f",
+    "name": "Cardinal"
+   },
+   {
+    "id": "team_dc96b0f629ac",
+    "name": "Fighting Irish"
+   }
+  ],
+  "kickoffAt": "2026-10-10T19:30:00.000Z",
+  "kickoffPrecision": "exact",
+  "eventDate": "2026-10-10",
+  "status": "scheduled",
+  "venues": [
+   "kalshi",
+   "novig",
+   "pascal",
+   "polymarket",
+   "polymarket_us",
+   "predictfun",
+   "sxbet"
+  ],
+  "market": {
+   "marketType": "moneyline",
+   "period": "full",
+   "line": null,
+   "lineTeam": null,
+   "lines": [
+    {
+     "line": null,
+     "venues": [
+      "kalshi",
+      "pascal",
+      "polymarket",
+      "polymarket_us",
+      "predictfun",
+      "sxbet"
+     ]
+    }
+   ],
+   "selections": [
+    {
+     "selection": {
+      "key": "home",
+      "kind": "team",
+      "side": "home",
+      "team": {
+       "id": "team_dc96b0f629ac",
+       "name": "Fighting Irish"
+      }
+     },
+     "cells": [
+      {
+       "venue": "kalshi",
+       "marketId": "KXNCAAFGAME-26OCT10STANND-ND",
+       "outcomeId": "KXNCAAFGAME-26OCT10STANND-ND",
+       "selection": "home",
+       "gross": null,
+       "grossReason": "no_asks",
+       "net": null,
+       "feeBps": null,
+       "feeUnknown": true,
+       "sizeAtPrice": null,
+       "asOf": "2026-10-08T09:17:10.432Z",
+       "stale": false,
+       "source": "live"
+      },
+      {
+       "venue": "polymarket",
+       "marketId": "5097849",
+       "outcomeId": "40140913748700432657825287030385498741371902209588300265395315855058671362575",
+       "selection": "home",
+       "gross": {
+        "probability": 0.995,
+        "american": -19900,
+        "decimal": 1.005
+       },
+       "grossReason": null,
+       "net": null,
+       "feeBps": null,
+       "feeUnknown": true,
+       "sizeAtPrice": null,
+       "asOf": "2026-10-08T08:27:51.804Z",
+       "stale": false,
+       "source": "catalog"
+      },
+      {
+       "venue": "polymarket_us",
+       "marketId": "aec-cfb-stan-nd-2026-10-10",
+       "outcomeId": "aec-cfb-stan-nd-2026-10-10:short",
+       "selection": "home",
+       "gross": {
+        "probability": 0.99,
+        "american": -9900,
+        "decimal": 1.01
+       },
+       "grossReason": null,
+       "net": null,
+       "feeBps": null,
+       "feeUnknown": true,
+       "sizeAtPrice": null,
+       "asOf": "2026-10-08T04:03:25.924Z",
+       "stale": false,
+       "source": "catalog"
+      },
+      {
+       "venue": "predictfun",
+       "marketId": "2750904",
+       "outcomeId": "predictfun:2750904:2",
+       "selection": "home",
+       "gross": null,
+       "grossReason": "no_asks",
+       "net": null,
+       "feeBps": null,
+       "feeUnknown": true,
+       "sizeAtPrice": null,
+       "asOf": "2026-10-08T09:10:35.584Z",
+       "stale": false,
+       "source": "live"
+      },
+      {
+       "venue": "sxbet",
+       "marketId": "0x42a046941253d19934fa92482769bb86855dfde29523a0ab6c828e5b705de9a8",
+       "outcomeId": "0x42a046941253d19934fa92482769bb86855dfde29523a0ab6c828e5b705de9a8#0",
+       "selection": "home",
+       "gross": null,
+       "grossReason": "no_asks",
+       "net": null,
+       "feeBps": null,
+       "feeUnknown": true,
+       "sizeAtPrice": null,
+       "asOf": "2026-10-08T06:21:42.069Z",
+       "stale": false,
+       "source": "live"
+      }
+     ],
+     "best": null,
+     "avg": null,
+     "fair": null,
+     "edge": null,
+     "edgeOnGross": false
+    },
+    {
+     "selection": {
+      "key": "away",
+      "kind": "team",
+      "side": "away",
+      "team": {
+       "id": "team_c88cad627f3f",
+       "name": "Cardinal"
+      }
+     },
+     "cells": [
+      {
+       "venue": "kalshi",
+       "marketId": "KXNCAAFGAME-26OCT10STANND-STAN",
+       "outcomeId": "KXNCAAFGAME-26OCT10STANND-STAN",
+       "selection": "away",
+       "gross": {
+        "probability": 0.01,
+        "american": 9900,
+        "decimal": 100
+       },
+       "grossReason": null,
+       "net": {
+        "probability": 0.0107,
+        "american": 9246,
+        "decimal": 93.458
+       },
+       "feeBps": 7,
+       "feeUnknown": false,
+       "sizeAtPrice": 1406398.2,
+       "asOf": "2026-10-08T09:17:31.035Z",
+       "stale": false,
+       "source": "live"
+      },
+      {
+       "venue": "pascal",
+       "marketId": "CFB_26OCT10_STANND_ML.STAN",
+       "outcomeId": "CFB_26OCT10_STANND_ML.STAN#0",
+       "selection": "away",
+       "gross": {
+        "probability": 0.098,
+        "american": 920,
+        "decimal": 10.204
+       },
+       "grossReason": null,
+       "net": {
+        "probability": 0.1,
+        "american": 900,
+        "decimal": 10
+       },
+       "feeBps": 20,
+       "feeUnknown": false,
+       "sizeAtPrice": 205,
+       "asOf": "2026-10-08T09:17:29.190Z",
+       "stale": false,
+       "source": "live"
+      },
+      {
+       "venue": "polymarket",
+       "marketId": "5097849",
+       "outcomeId": "38709153531623930862079461283342234901204898772802626076308063772737679916796",
+       "selection": "away",
+       "gross": {
+        "probability": 0.005,
+        "american": 19900,
+        "decimal": 200
+       },
+       "grossReason": null,
+       "net": null,
+       "feeBps": null,
+       "feeUnknown": true,
+       "sizeAtPrice": null,
+       "asOf": "2026-10-08T08:27:51.804Z",
+       "stale": false,
+       "source": "catalog"
+      },
+      {
+       "venue": "polymarket_us",
+       "marketId": "aec-cfb-stan-nd-2026-10-10",
+       "outcomeId": "aec-cfb-stan-nd-2026-10-10:long",
+       "selection": "away",
+       "gross": {
+        "probability": 0.01,
+        "american": 9900,
+        "decimal": 100
+       },
+       "grossReason": null,
+       "net": null,
+       "feeBps": null,
+       "feeUnknown": true,
+       "sizeAtPrice": null,
+       "asOf": "2026-10-08T04:03:25.924Z",
+       "stale": false,
+       "source": "catalog"
+      },
+      {
+       "venue": "predictfun",
+       "marketId": "2750904",
+       "outcomeId": "predictfun:2750904:1",
+       "selection": "away",
+       "gross": {
+        "probability": 0.48,
+        "american": 108,
+        "decimal": 2.083
+       },
+       "grossReason": null,
+       "net": {
+        "probability": 0.4896,
+        "american": 104,
+        "decimal": 2.042
+       },
+       "feeBps": 96,
+       "feeUnknown": false,
+       "sizeAtPrice": 276.923,
+       "asOf": "2026-10-08T09:10:35.584Z",
+       "stale": false,
+       "source": "live"
+      },
+      {
+       "venue": "sxbet",
+       "marketId": "0x42a046941253d19934fa92482769bb86855dfde29523a0ab6c828e5b705de9a8",
+       "outcomeId": "0x42a046941253d19934fa92482769bb86855dfde29523a0ab6c828e5b705de9a8#1",
+       "selection": "away",
+       "gross": {
+        "probability": 0.0125,
+        "american": 7900,
+        "decimal": 80
+       },
+       "grossReason": null,
+       "net": {
+        "probability": 0.0125,
+        "american": 7900,
+        "decimal": 80
+       },
+       "feeBps": 0,
+       "feeUnknown": false,
+       "sizeAtPrice": 8.584303,
+       "asOf": "2026-10-08T06:21:42.069Z",
+       "stale": true,
+       "source": "live"
+      }
+     ],
+     "best": {
+      "venue": "kalshi",
+      "marketId": "KXNCAAFGAME-26OCT10STANND-STAN",
+      "outcomeId": "KXNCAAFGAME-26OCT10STANND-STAN",
+      "selection": "away",
+      "gross": {
+       "probability": 0.01,
+       "american": 9900,
+       "decimal": 100
+      },
+      "grossReason": null,
+      "net": {
+       "probability": 0.0107,
+       "american": 9246,
+       "decimal": 93.458
+      },
+      "feeBps": 7,
+      "feeUnknown": false,
+      "sizeAtPrice": 1406398.2,
+      "asOf": "2026-10-08T09:17:31.035Z",
+      "stale": false,
+      "source": "live"
+     },
+     "avg": {
+      "probability": 0.196,
+      "american": 410,
+      "decimal": 5.102
+     },
+     "fair": null,
+     "edge": null,
+     "edgeOnGross": false
+    }
+   ],
+   "hold": {
+    "average": null,
+    "byVenue": {}
+   }
+  }
+ }
+}

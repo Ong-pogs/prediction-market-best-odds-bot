@@ -1,0 +1,49 @@
+Build me a local, read-only "best odds" board for sports on prediction markets, using the Predictefy API. For each upcoming game it shows, for each side, the best price on offer across venues (Polymarket, Kalshi and the others Predictefy covers), which venue has it, the average, the no-vig fair price, and how far the best price is ahead of the next venue. It is a price comparison. It must never place orders, never ask for a venue account or wallet key, and never call a price gap "arbitrage" on its own.
+
+STACK
+- Node.js 22 or newer, ES modules, no npm dependencies. Use the built-in http server, fetch and node:test.
+- Files: bot/engine.mjs (pure functions, no network), bot/server.mjs (polling and a local web server), bot/public/index.html (one-file dashboard that imports the cost maths from /engine.mjs), bot/engine.test.mjs, bot/peek.mjs, .env.example, README.md.
+- Read PREDICTEFY_API_KEY from the process environment or a local .env file (parse it with node:util parseEnv). Treat the placeholder value in .env.example as "not set" and exit with a clear message. Send the key only in the Authorization: Bearer header, only from the Node process. Never send it to the browser, never log it.
+- Bind the web server to 127.0.0.1 only. Default port 8817, overridable with BEST_ODDS_PORT. Reject POST requests whose Origin is not the dashboard itself.
+
+DATA (base URL https://data.predictefy.com, all GET; docs at https://docs.predictefy.com/guides/sports/)
+- League list, once a day, 1 credit: /v1/sports/competitions. Rows have id, sport, name, active, venues[]. Find the watched leagues in it by name and sport. Defaults: NFL and College Football (sport american_football).
+- The board, 5 credits per league per refresh: /v1/sports/screen?competition={id}&marketType={type}&status=scheduled,live&limit=200. Use marketType=match_result for soccer (it has a draw) and moneyline for every other sport. Follow nextCursor for at most 3 pages.
+- Each row has fixtureId, sport, competition{id,name,timeZone}, home, away, teams[], kickoffAt, kickoffPrecision, status, venues[] and market. market has selections[] and hold{average, byVenue}. Each selection has selection{key, team}, cells[] (one per venue), best, avg, fair, edge, edgeOnGross.
+- Each cell has venue, gross{probability, american, decimal} (the ask before fees, or null with grossReason), net (the price with the venue's known fees, or null), feeUnknown, sizeAtPrice, asOf, stale, source ("live" or "catalog").
+- best, avg, fair, edge and hold are Predictefy's own calculations. Show them exactly as returned. Do not recompute them and do not convert odds yourself. An empty cell is absent, never zero.
+- One game's spread and total, only when the user asks, 5 credits: /v1/sports/fixtures/{fixtureId}. Its data.markets[] holds one block per market type and period at its main line; show the full-game spread and total.
+- The arbitrage check, only when the user asks, 15 credits, Builder plan and higher: /api/router/fetchArbitrage?executableOnly=true&limit=500. Rows that belong to a sports game carry sports.fixtureId. A row counts only if label is "arbitrage" and executable is true.
+- Read the x-credits-charged response header on every call and keep a running total.
+- If any call answers 402, or 403 with code PLAN_REQUIRED, keep running, show a box on the dashboard that says which route was refused, and link to https://predictefy.com/en/pricing?utm_source=youtube&utm_medium=video&utm_campaign=best-odds-bot&utm_content=upgrade
+
+WHAT THE BOT WORKS OUT ITSELF
+- A cell's state: "none" when gross is null, "catalog" when source is not live (a listed price, not a live ask), "stale" when stale is true, otherwise "live". Only live cells count as venues.
+- The comparable price of a cell: net when the fee is known, otherwise gross, labelled "ask, fee unknown".
+- Lead: the comparable price of the cheapest live cell that is not the best venue, minus the best price, in cents.
+- Wide book: hold.average above 5%. One venue is quoting far from the rest, so the average, fair and edge mean little.
+- Alert (the bot's own rule, labelled "indicative"): the game is scheduled or live, the side has a fair price, the hold is not wide, at least 3 venues are live on that side, the lead is at least 1 cent, and at least 25 contracts sit at the best price. All four numbers are settings.
+- Cost: credits per refresh = leagues x 5. Per day = that x floor(1440 / refresh minutes) + 1. Per month = per day x 31. Name the smallest plan that covers it: Free 25,000 credits, Builder 500,000 ($48.88 a month), Pro 5,000,000 ($149 a month). Also work out the shortest refresh interval that still fits Free.
+
+BEHAVIOUR
+- Refresh every 30 minutes by default (1 to 1440). On start, print the leagues, the cost of one refresh and of a month, one line per API call with its credits, the next two games with both sides (best price, venue, avg, fair, edge), and an ALERT line for each of the first four alerts, for example: "ALERT  Las Vegas Raiders 37.3¢ on SX Bet · 1.5¢ under Novig · size 82 · indicative".
+- Keep an alert log with first seen and last seen, and mark an alert "gone" when it is no longer on the board.
+- Save the board, alert log, settings and counters to data/best-odds-state.json, and the last raw response per league next to it. BEST_ODDS_REPLAY=1 serves the saved board without calling the API. BEST_ODDS_DATA picks another data folder.
+- Changing the alert settings re-applies the rule to prices already on the board without a new API call.
+
+DASHBOARD (dark theme, large type, readable on a screen recording; Predictefy red, #c41e3a, for the chrome and the alert badge)
+- Header: the name "Best Odds", the line "A price comparison across prediction markets · every number comes from the Predictefy API", live or replay status, last and next refresh, and a "Refresh now" button that shows its cost.
+- Overview tiles: games on the board, venues with a live price, alerts right now, credits for one refresh, credits for a 31-day month with a meter against the Free plan's 25,000.
+- Tabs: Board, Alerts, How to read it, Settings & cost.
+- Board: filter chips (league, next 24 hours or this week, 3+ venues live, sort by kickoff, biggest lead or biggest edge). One block per game, one row per side: kick-off in the league's time zone, team, best price in cents, venue and size, a strip chart, avg, fair, edge, lead, and live venues out of listed venues. Every column header names the API field it shows.
+- The strip chart is a dot plot on a fixed 6-cent window so a gap looks the same on every row: best venue as a larger filled dot in one accent colour, other live venues as grey dots, stale quotes as hollow circles, listed prices as hollow diamonds, the fair price as a white tick and the average as a thin grey tick. Stack dots that share a price. Each dot has a hover tooltip with venue, price, state and size.
+- Clicking a game opens a side panel: for each side a table of every venue sorted by price (dot on the same scale, price with fees, ask, size, quote age, state), then a button to load spread and total, then the result of the arbitrage check for that game.
+- Alerts tab: the rule in one sentence, the arbitrage check with its button and result ("N rows passed every gate across all markets, M in sports, K on this board"), and the alert log with best price, next venue, lead, size, fair and edge. Every alert is tagged "Indicative" unless the arbitrage check passed a row for that game.
+- How to read it: five cards (Best, Avg, Fair, Edge, Hold), each with one or two plain sentences and the arithmetic worked with a real game from the board, plus what the bot adds (lead and the alert rule) and what the board is not.
+- Settings & cost: league checklist with sport and venue count, the refresh interval, the three alert settings, and a "What this costs to run" box that redoes the sum as you type, shows the meter turning red when it passes the Free plan, names the plan needed and links to the pricing page.
+- Escape every string that comes from an API before putting it in the page.
+
+ALSO
+- bot/peek.mjs prints one side of one game as returned by the API: each venue's cell (venue, gross, net, sizeAtPrice, stale, source), then best, avg, fair, edge and hold.
+- Unit tests with real saved rows, including: stale and listed cells cannot be the next venue; a tight game with a small lead does not alert; a clear lead with enough size does; a wide book never alerts even when the returned edge is above 400%; a game with one side missing has no fair price and no alert, and its empty cells stay null; the default settings fit the Free plan; a 5-minute refresh is costed as needing Builder; only a gate-passed row for a game on the board counts as arbitrage.
+- README with quick start, the plain-words table for best, avg, fair, edge and hold, the alert rule, what it costs to run, the settings, and a plain list of what the tool cannot tell you.

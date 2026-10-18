@@ -1,0 +1,14 @@
+{
+  "name": "prediction-market-best-odds-bot",
+  "version": "1.0.0",
+  "description": "Finds the best price for each side of a game across Polymarket, Kalshi and other prediction markets using the Predictefy API. Read-only, runs locally.",
+  "type": "module",
+  "license": "MIT",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "start": "node bot/server.mjs",
+    "peek": "node bot/peek.mjs",
+    "test": "node --test"
+  },
+  "keywords": ["polymarket", "kalshi", "prediction-markets", "sports", "odds-comparison", "best-odds", "no-vig", "predictefy", "nfl"]
+}
