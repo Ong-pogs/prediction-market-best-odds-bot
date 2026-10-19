@@ -1,8 +1,12 @@
-# Prediction Market Best Odds Bot
+# Polymarket and Kalshi Best Odds Bot with the Predictefy API
 
 A small, read-only bot that lists upcoming games and, for each side, shows the best price on offer across Polymarket, Kalshi and the other prediction markets Predictefy covers: which venue has it, the average, the no-vig fair price, and how far the best price is ahead of the next venue.
 
 It runs on your own computer, gets every number from the [Predictefy API](https://predictefy.com/en/api?utm_source=github&utm_medium=repo&utm_campaign=best-odds-bot&utm_content=github), and opens a local dashboard in your browser. It never places orders and never asks for a venue account or a wallet key.
+
+This example uses Node.js's built-in `fetch` to call the REST API directly. No SDK is required. If you prefer a typed client, see the official [Predictefy TypeScript SDK](https://docs.predictefy.com/guides/sdk/); Python users can start with the [Python SDK](https://docs.predictefy.com/guides/python-sdk/).
+
+[![Tests](https://github.com/Ong-pogs/prediction-market-best-odds-bot/actions/workflows/test.yml/badge.svg)](https://github.com/Ong-pogs/prediction-market-best-odds-bot/actions/workflows/test.yml)
 
 ![Best Odds dashboard](docs/dashboard.png)
 
@@ -37,6 +41,12 @@ Open the address it prints, `http://127.0.0.1:8817`. There is nothing to install
 ## Build it yourself
 
 If you would rather have an AI coding tool write the bot from scratch, [`build-prompt.txt`](build-prompt.txt) is the full specification: the endpoints, the alert rule, the cost maths and the dashboard. Paste it into your AI coding tool in an empty folder.
+
+## The recorded walkthrough
+
+The video uses an archived **October 8, 2026** board with 126 games and five qualifying alerts. A displayed 441% edge illustrated how a distorted average can mislead. These are dated observations, not current quotes or promises about what a new run will return.
+
+The source, dashboard screenshot and small test fixtures are included here. Local `.env` files and the full saved dashboard state are excluded. Fetch your own board before using replay mode; the archived video snapshot is not bundled. Prices, coverage and alert counts will differ on a new run.
 
 ## How to read the numbers
 
@@ -112,6 +122,28 @@ node --test
 ```
 
 The tests run on real rows saved from the API in `bot/testdata/`.
+
+GitHub Actions runs them on Windows, macOS and Linux with Node.js 22. Tests use local fixtures and do not call the API or need a key.
+
+## Predictefy API and SDK resources
+
+| Resource | What it helps with |
+|---|---|
+| [Prediction market API](https://predictefy.com/en/api?utm_source=github&utm_medium=repo&utm_campaign=best-odds-bot&utm_content=resources) | API overview and access |
+| [API quickstart](https://docs.predictefy.com/quickstart/) | Your first authenticated request |
+| [Get an API key](https://portal.predictefy.com/keys) | The key used by this bot |
+| [Sports data guide](https://docs.predictefy.com/guides/sports/) | Fixtures, live quotes, fair prices and edge calculations |
+| [Arbitrage scanner guide](https://docs.predictefy.com/guides/cookbook/arbitrage-scanner/) | Understanding the separate assessed-arbitrage feed and its plan requirement |
+| [TypeScript SDK](https://docs.predictefy.com/guides/sdk/) | An alternative to direct REST calls for a TypeScript app |
+| [Python SDK](https://docs.predictefy.com/guides/python-sdk/) | Using the API from Python |
+| [API reference](https://docs.predictefy.com/api/) | Request parameters and response schemas |
+| [Venue coverage](https://docs.predictefy.com/reference/venues/) | Checking supported market data before comparing venues |
+| [Credits and plan entitlements](https://docs.predictefy.com/guides/credits/) | Budgeting refreshes and understanding feature access |
+| [Pricing](https://predictefy.com/en/pricing) | Current plan prices and allowances |
+| [Rate limits and retries](https://docs.predictefy.com/guides/rate-limits/) | Pacing requests and handling temporary failures |
+| [API error reference](https://docs.predictefy.com/guides/errors/) | Authentication, plan and data-availability errors |
+
+Questions about the API: [Predictefy Discord](https://discord.gg/KVrWkhD8S).
 
 ## License
 
