@@ -2,7 +2,7 @@
 
 A small, read-only bot that lists upcoming games and, for each side, shows the best price on offer across Polymarket, Kalshi and the other prediction markets Predictefy covers: which venue has it, the average, the no-vig fair price, and how far the best price is ahead of the next venue.
 
-It runs on your own computer, gets every number from the [Predictefy API](https://predictefy.com/en/api?utm_source=github&utm_medium=repo&utm_campaign=best-odds-bot&utm_content=github), and opens a local dashboard in your browser. It never places orders and never asks for a venue account or a wallet key.
+It runs on your own computer, gets every number from the [Predictefy API](https://predictefy.com/en/prediction-market-api?utm_source=github&utm_medium=repo&utm_campaign=best-odds-bot&utm_content=github), and opens a local dashboard in your browser. It never places orders and never asks for a venue account or a wallet key.
 
 This example uses Node.js's built-in `fetch` to call the REST API directly. No SDK is required. If you prefer a typed client, see the official [Predictefy TypeScript SDK](https://docs.predictefy.com/guides/sdk/); Python users can start with the [Python SDK](https://docs.predictefy.com/guides/python-sdk/).
 
@@ -129,7 +129,7 @@ GitHub Actions runs them on Windows, macOS and Linux with Node.js 22. Tests use 
 
 | Resource | What it helps with |
 |---|---|
-| [Prediction market API](https://predictefy.com/en/api?utm_source=github&utm_medium=repo&utm_campaign=best-odds-bot&utm_content=resources) | API overview and access |
+| [Prediction market API](https://predictefy.com/en/prediction-market-api?utm_source=github&utm_medium=repo&utm_campaign=best-odds-bot&utm_content=resources) | API overview and access |
 | [API quickstart](https://docs.predictefy.com/quickstart/) | Your first authenticated request |
 | [Get an API key](https://portal.predictefy.com/keys) | The key used by this bot |
 | [Sports data guide](https://docs.predictefy.com/guides/sports/) | Fixtures, live quotes, fair prices and edge calculations |
